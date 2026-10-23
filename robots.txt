@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://carlos23ksb.github.io/autoaccesorios-mx/sitemap.xml
