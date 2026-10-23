@@ -15,6 +15,13 @@
 <meta property="og:image" content="https://carlos23ksb.github.io/autoaccesorios-mx/img/portada.webp">
 <meta property="og:locale" content="es_MX">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0a2540">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="AutoAccesorios">
+<link rel="apple-touch-icon" href="img/icons/icon-180.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Store","name":"AutoAccesorios MX","url":"https://carlos23ksb.github.io/autoaccesorios-mx/","description":"Tienda en línea de accesorios para auto y moto en México: cámaras 360°, arrancadores, infladores, espejos con cámara, GPS, luces LED y más. Precios con envío incluido a todo México.","image":"https://carlos23ksb.github.io/autoaccesorios-mx/img/portada.webp","logo":"https://carlos23ksb.github.io/autoaccesorios-mx/img/logo.webp","telephone":"+52-56-5582-9704","currenciesAccepted":"MXN","areaServed":{"@type":"Country","name":"México"},"address":{"@type":"PostalAddress","addressCountry":"MX"}}
 </script>
@@ -84,6 +91,8 @@ footer{background:var(--azul-oscuro); color:#cfe0f5; margin-top:50px;}
 footer .marca{color:#fff;}
 /* WhatsApp flotante */
 .wa-flotante{position:fixed; right:16px; bottom:16px; z-index:60; background:var(--verde); color:#fff; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,.25); font-size:1.7rem;}
+.btn-instalar{position:fixed; left:16px; bottom:16px; z-index:60; background:var(--naranja); color:#fff; border:none; font-family:inherit; font-weight:700; font-size:.95rem; padding:14px 20px; border-radius:999px; box-shadow:0 6px 20px rgba(0,0,0,.25); cursor:pointer; align-items:center; gap:8px;}
+.btn-instalar:hover{background:var(--naranja-oscuro);}
 .wa-flotante:hover{filter:brightness(1.08);}
 /* Modal checkout */
 .modal-fondo{display:none; position:fixed; inset:0; background:rgba(10,25,47,.62); z-index:100; padding:14px; overflow-y:auto;}
@@ -233,6 +242,7 @@ footer .marca{color:#fff;}
 </footer>
 
 <a class="wa-flotante" href="https://wa.me/525655829704?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20un%20producto%20de%20AutoAccesorios%20MX" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">💬</a>
+<button id="btnInstalar" class="btn-instalar" style="display:none" aria-label="Instalar la app de AutoAccesorios MX">📲 Instalar app</button>
 
 
 <!-- ===== MODAL DE DETALLE DE PRODUCTO ===== -->
@@ -629,6 +639,33 @@ galBox.addEventListener("touchend", e => {
 }, {passive:true});
 
 render();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  });
+}
+var promptInstalar = null;
+var btnInstalarApp = document.getElementById("btnInstalar");
+window.addEventListener("beforeinstallprompt", function (e) {
+  e.preventDefault();
+  promptInstalar = e;
+  if (btnInstalarApp) btnInstalarApp.style.display = "inline-flex";
+});
+if (btnInstalarApp) {
+  btnInstalarApp.addEventListener("click", function () {
+    if (!promptInstalar) return;
+    promptInstalar.prompt();
+    promptInstalar.userChoice.then(function (r) {
+      if (r && r.outcome === "accepted") btnInstalarApp.style.display = "none";
+      promptInstalar = null;
+    });
+  });
+}
+window.addEventListener("appinstalled", function () {
+  if (btnInstalarApp) btnInstalarApp.style.display = "none";
+});
 </script>
 </body>
 </html>
