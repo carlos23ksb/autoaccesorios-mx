@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoAccesorios MX — Accesorios para tu auto con envío incluido a todo México</title>
+<meta name="description" content="Tienda en línea de accesorios para auto: cámaras 360°, arrancadores, infladores, espejos con cámara, GPS, luces LED y más. Todos los precios incluyen envío a todo México. Pide por WhatsApp y paga por transferencia o depósito OXXO.">
+<link rel="canonical" href="https://cberroteran400-spec.github.io/autoaccesorios-mx/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AutoAccesorios MX">
+<meta property="og:title" content="AutoAccesorios MX — Accesorios para tu auto, envío incluido">
+<meta property="og:description" content="Cámaras, arrancadores, infladores, GPS, luces LED y más para tu auto. Precios con envío incluido a todo México. Pedidos por WhatsApp.">
+<meta property="og:url" content="https://cberroteran400-spec.github.io/autoaccesorios-mx/">
+<meta property="og:image" content="https://cberroteran400-spec.github.io/autoaccesorios-mx/img/portada.webp">
+<meta property="og:locale" content="es_MX">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/webp" href="img/logo.webp">
+<style>
+:root{
+  --azul:#0057e7; --azul-oscuro:#0a2540; --naranja:#ff7a1a; --naranja-oscuro:#e85d00;
+  --fondo:#f4f7fc; --texto:#1c2733; --gris:#5b6b7d; --borde:#dde5ef; --verde:#1fae55;
+  --radio:14px; --sombra:0 4px 18px rgba(10,37,64,.10);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.5;}
+img{max-width:100%; display:block;}
+a{text-decoration:none;}
+/* Encabezado */
+header{background:#fff; box-shadow:0 2px 10px rgba(10,37,64,.08); position:sticky; top:0; z-index:50;}
+.header-in{max-width:1180px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:12px;}
+.logo{width:46px; height:46px; border-radius:50%; object-fit:cover; border:2px solid var(--azul);}
+.marca{font-size:1.35rem; font-weight:800; color:var(--azul-oscuro); letter-spacing:-.5px;}
+.marca span{color:var(--naranja);}
+.header-wa{margin-left:auto; background:var(--verde); color:#fff; font-weight:700; padding:9px 14px; border-radius:999px; font-size:.9rem; display:inline-flex; align-items:center; gap:6px; white-space:nowrap;}
+.header-wa:hover{filter:brightness(1.07);}
+/* Hero */
+.hero{background:linear-gradient(120deg,var(--azul-oscuro) 0%,var(--azul) 55%,#2f8bff 100%); color:#fff; }
+.hero-in{max-width:1180px; margin:0 auto; padding:38px 16px 30px; text-align:center;}
+.hero h1{font-size:2rem; line-height:1.15; font-weight:900;}
+.hero h1 em{font-style:normal; color:#ffb066;}
+.hero p{margin:12px auto 0; max-width:640px; font-size:1.05rem; color:#dbe9ff;}
+.beneficios{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px;}
+.beneficio{background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); padding:8px 14px; border-radius:999px; font-weight:600; font-size:.9rem;}
+/* Buscador y filtros */
+main{max-width:1180px; margin:0 auto; padding:22px 16px 40px;}
+.buscador{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:16px;}
+.buscador input[type=search]{flex:1 1 240px; padding:12px 16px; border:2px solid var(--borde); border-radius:999px; font-size:1rem; background:#fff; outline:none;}
+.buscador input[type=search]:focus{border-color:var(--azul);}
+.filtros{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;}
+.filtro{border:2px solid var(--borde); background:#fff; color:var(--texto); padding:8px 16px; border-radius:999px; font-weight:600; cursor:pointer; font-size:.92rem;}
+.filtro.activo{background:var(--azul); border-color:var(--azul); color:#fff;}
+/* Tarjetas */
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:18px;}
+.card{background:#fff; border:1px solid var(--borde); border-radius:var(--radio); overflow:hidden; box-shadow:var(--sombra); display:flex; flex-direction:column;}
+.card img{width:100%; height:210px; object-fit:cover; background:#eef2f8;}
+.card-body{padding:14px 16px 16px; display:flex; flex-direction:column; gap:8px; flex:1;}
+.card h3{font-size:1.02rem; line-height:1.3; color:var(--azul-oscuro);}
+.card .desc{font-size:.9rem; color:var(--gris); flex:1;}
+.etiqueta-envio{align-self:flex-start; background:#e7f7ee; color:#0d7a3c; font-size:.75rem; font-weight:700; padding:3px 9px; border-radius:999px;}
+.precio{font-size:1.5rem; font-weight:900; color:var(--naranja-oscuro);}
+.precio small{font-size:.8rem; color:var(--gris); font-weight:600;}
+.btn-comprar{background:linear-gradient(180deg,var(--naranja),var(--naranja-oscuro)); color:#fff; border:none; border-radius:10px; padding:13px; font-size:1rem; font-weight:800; cursor:pointer; width:100%;}
+.btn-comprar:hover{filter:brightness(1.06);}
+.sin-resultados{display:none; text-align:center; color:var(--gris); padding:30px 0; font-size:1.05rem;}
+/* Secciones */
+section.bloque{margin-top:44px;}
+section.bloque h2{font-size:1.5rem; color:var(--azul-oscuro); margin-bottom:14px;}
+.pasos{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px;}
+.paso{background:#fff; border:1px solid var(--borde); border-radius:var(--radio); padding:18px; box-shadow:var(--sombra);}
+.paso .num{width:36px; height:36px; border-radius:50%; background:var(--azul); color:#fff; font-weight:900; display:flex; align-items:center; justify-content:center; margin-bottom:8px;}
+.paso h3{font-size:1rem; margin-bottom:4px;}
+.paso p{font-size:.9rem; color:var(--gris);}
+details.faq{background:#fff; border:1px solid var(--borde); border-radius:10px; padding:14px 16px; margin-bottom:10px;}
+details.faq summary{font-weight:700; cursor:pointer; color:var(--azul-oscuro);}
+details.faq p{margin-top:8px; color:var(--gris); font-size:.95rem;}
+/* Pie */
+footer{background:var(--azul-oscuro); color:#cfe0f5; margin-top:50px;}
+.footer-in{max-width:1180px; margin:0 auto; padding:28px 16px; text-align:center; font-size:.92rem;}
+footer .marca{color:#fff;}
+/* WhatsApp flotante */
+.wa-flotante{position:fixed; right:16px; bottom:16px; z-index:60; background:var(--verde); color:#fff; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,.25); font-size:1.7rem;}
+.wa-flotante:hover{filter:brightness(1.08);}
+/* Modal checkout */
+.modal-fondo{display:none; position:fixed; inset:0; background:rgba(10,25,47,.62); z-index:100; padding:14px; overflow-y:auto;}
+.modal-fondo.abierto{display:block;}
+.modal{background:#fff; border-radius:16px; max-width:520px; margin:20px auto; padding:22px; position:relative;}
+.modal h2{font-size:1.25rem; color:var(--azul-oscuro); margin-bottom:4px; padding-right:30px;}
+.modal .cerrar{position:absolute; top:12px; right:14px; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--gris); line-height:1;}
+.resumen-prod{background:var(--fondo); border:1px solid var(--borde); border-radius:10px; padding:12px 14px; margin:12px 0 16px; font-size:.95rem;}
+.resumen-prod strong{color:var(--azul-oscuro);}
+.campo{margin-bottom:12px;}
+.campo label{display:block; font-weight:600; font-size:.9rem; margin-bottom:4px;}
+.campo input,.campo select{width:100%; padding:11px 12px; border:2px solid var(--borde); border-radius:9px; font-size:1rem; outline:none; background:#fff;}
+.campo input:focus,.campo select:focus{border-color:var(--azul);}
+.dos-col{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+.error{color:#c0392b; font-size:.85rem; display:none; margin-top:2px;}
+.btn-principal{background:linear-gradient(180deg,var(--naranja),var(--naranja-oscuro)); color:#fff; border:none; border-radius:10px; padding:14px; font-size:1rem; font-weight:800; cursor:pointer; width:100%; margin-top:6px;}
+.btn-wa{background:var(--verde); color:#fff; border:none; border-radius:10px; padding:14px; font-size:1.02rem; font-weight:800; cursor:pointer; width:100%; display:block; text-align:center;}
+.pago-box{background:#eef6ff; border:2px dashed var(--azul); border-radius:12px; padding:16px; margin:14px 0;}
+.pago-box h3{color:var(--azul-oscuro); margin-bottom:8px; font-size:1.02rem;}
+.pago-box p{font-size:.95rem; margin-bottom:5px;}
+.clabe-fila{display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin:8px 0;}
+.clabe-num{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:1.12rem; font-weight:800; letter-spacing:1px; background:#fff; border:1px solid var(--borde); border-radius:8px; padding:8px 12px;}
+.btn-copiar{background:var(--azul); color:#fff; border:none; border-radius:8px; padding:9px 14px; font-weight:700; cursor:pointer; font-size:.9rem;}
+.aviso-captura{background:#fff7e8; border:1px solid #ffd9a0; border-radius:10px; padding:12px 14px; font-size:.93rem; margin-bottom:14px;}
+.total-final{font-size:1.15rem; font-weight:800; color:var(--azul-oscuro); text-align:center; margin:10px 0 14px;}
+.paso-oculto{display:none;}
+@media (max-width:560px){
+  .hero h1{font-size:1.55rem;}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:12px;}
+  .card img{height:150px;}
+  .precio{font-size:1.25rem;}
+  .marca{font-size:1.12rem;}
+  .header-wa{font-size:.8rem; padding:8px 11px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-in">
+    <img class="logo" src="img/logo.webp" alt="Logo de AutoAccesorios MX">
+    <div class="marca">AutoAccesorios <span>MX</span></div>
+    <a class="header-wa" href="https://wa.me/525655829704?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20un%20producto%20de%20AutoAccesorios%20MX" target="_blank" rel="noopener">💬 WhatsApp</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-in">
+    <h1>Accesorios para tu auto, <em>con envío incluido</em> a todo México 🚗</h1>
+    <p>Cámaras, arrancadores, infladores, espejos inteligentes, GPS, luces LED y más. Todos nuestros precios <strong>ya incluyen el envío</strong>: pagas lo que ves, sin sorpresas.</p>
+    <div class="beneficios">
+      <div class="beneficio">🚚 Envío incluido en todo</div>
+      <div class="beneficio">💳 Transferencia o depósito OXXO</div>
+      <div class="beneficio">📦 Despacho en 48 h aprox.</div>
+      <div class="beneficio">💬 Atención por WhatsApp</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="buscador">
+    <input type="search" id="buscador" placeholder="🔎 Busca un producto… (ej. cámara, LED, funda)" aria-label="Buscar productos">
+  </div>
+  <div class="filtros" id="filtros">
+    <button class="filtro activo" data-cat="todos">Todos</button>
+    <button class="filtro" data-cat="camaras">Cámaras y seguridad</button>
+    <button class="filtro" data-cat="emergencia">Emergencia</button>
+    <button class="filtro" data-cat="iluminacion">Iluminación</button>
+    <button class="filtro" data-cat="audio">Audio y carga</button>
+    <button class="filtro" data-cat="exterior">Exterior y comodidad</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <p class="sin-resultados" id="sinResultados">No encontramos productos con ese criterio. Prueba con otra palabra o revisa el catálogo completo. 👆</p>
+
+  <section class="bloque" id="como-pedir">
+    <h2>🛒 ¿Cómo pedir?</h2>
+    <div class="pasos">
+      <div class="paso"><div class="num">1</div><h3>Elige tu producto</h3><p>Busca en el catálogo y toca el botón <strong>Comprar</strong> del accesorio que quieres.</p></div>
+      <div class="paso"><div class="num">2</div><h3>Llena tus datos</h3><p>Completa el formulario con tu nombre, teléfono y dirección completa de entrega.</p></div>
+      <div class="paso"><div class="num">3</div><h3>Deposita o transfiere</h3><p>Te mostramos la cuenta para pagar el total de tu pedido (ya incluye el envío).</p></div>
+      <div class="paso"><div class="num">4</div><h3>Manda tu captura</h3><p>Al enviar tu pedido se abre WhatsApp con todos tus datos: adjunta ahí la captura de tu depósito.</p></div>
+      <div class="paso"><div class="num">5</div><h3>Recibe tu producto</h3><p>Despachamos en 48 h aprox. y tu pedido viaja directo hasta tu puerta, en todo México.</p></div>
+    </div>
+  </section>
+
+  <section class="bloque" id="faq">
+    <h2>❓ Preguntas frecuentes</h2>
+    <details class="faq">
+      <summary>¿El precio ya incluye el envío?</summary>
+      <p>Sí. Todos los precios de esta tienda <strong>ya incluyen el envío a todo México</strong>. El total que ves en tu pedido es lo único que pagas, sin cargos extra.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Cómo pago mi pedido?</summary>
+      <p>Por transferencia o depósito en OXXO a la cuenta que te muestra el formulario al momento de pedir. Después mandas la captura de tu comprobante por WhatsApp para confirmar tu compra.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Cuánto tarda en llegar mi pedido?</summary>
+      <p>Despachamos en aproximadamente 48 horas después de confirmar tu pago. El tiempo de tránsito depende de tu ciudad; te atendemos por WhatsApp para cualquier duda sobre tu envío.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Necesito registrarme o pagar en línea?</summary>
+      <p>No. Solo llenas el formulario con tus datos, depositas y nos mandas tu pedido por WhatsApp con la captura. Así de simple, sin registros ni tarjetas.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Puedo pedir más de una pieza o varios productos?</summary>
+      <p>Claro. En el formulario eliges la cantidad de cada producto. Si quieres combinar varios productos distintos, mándanos un WhatsApp y te armamos tu pedido completo.</p>
+    </details>
+    <details class="faq">
+      <summary>¿Qué pasa si tengo dudas antes de comprar?</summary>
+      <p>Escríbenos por WhatsApp al 56 5582 9704 y te atendemos con gusto para confirmar compatibilidad, medidas o cualquier detalle del producto.</p>
+    </details>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-in">
+    <div class="marca">AutoAccesorios <span>MX</span></div>
+    <p style="margin-top:8px;">Accesorios para tu auto con envío incluido a todo México.<br>Pedidos y atención por WhatsApp: <strong>56 5582 9704</strong></p>
+    <p style="margin-top:8px; color:#8fb0d8;">© 2026 AutoAccesorios MX — Todos los precios en pesos mexicanos (MXN), envío incluido.</p>
+  </div>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/525655829704?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20un%20producto%20de%20AutoAccesorios%20MX" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">💬</a>
+
+<!-- ===== MODAL DE COMPRA ===== -->
+<div class="modal-fondo" id="modalFondo" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+  <div class="modal">
+    <button class="cerrar" id="btnCerrar" aria-label="Cerrar">×</button>
+    <h2 id="modalTitulo">Completar pedido</h2>
+
+    <!-- PASO 1: FORMULARIO -->
+    <form id="formPedido" novalidate>
+      <div class="resumen-prod">
+        <strong id="resumenNombre"></strong><br>
+        Precio unitario: <strong id="resumenPrecio"></strong> <span style="color:#0d7a3c; font-weight:700;">(envío incluido)</span>
+      </div>
+      <div class="dos-col">
+        <div class="campo">
+          <label for="fCantidad">Cantidad</label>
+          <input type="number" id="fCantidad" min="1" max="20" value="1" required>
+        </div>
+        <div class="campo">
+          <label for="fTelefono">Tu teléfono / WhatsApp</label>
+          <input type="tel" id="fTelefono" placeholder="Ej. 55 1234 5678" required>
+          <span class="error" id="eTelefono">Escribe un teléfono válido de 10 dígitos.</span>
+        </div>
+      </div>
+      <div class="campo">
+        <label for="fNombre">Nombre completo</label>
+        <input type="text" id="fNombre" placeholder="Nombre y apellidos" required>
+        <span class="error" id="eNombre">Escribe tu nombre completo.</span>
+      </div>
+      <div class="dos-col">
+        <div class="campo">
+          <label for="fCalle">Calle</label>
+          <input type="text" id="fCalle" placeholder="Ej. Av. Insurgentes" required>
+          <span class="error" id="eCalle">Escribe tu calle.</span>
+        </div>
+        <div class="campo">
+          <label for="fNumero">Número (ext. e int.)</label>
+          <input type="text" id="fNumero" placeholder="Ej. 123, int. 4" required>
+          <span class="error" id="eNumero">Escribe el número de tu casa.</span>
+        </div>
+      </div>
+      <div class="dos-col">
+        <div class="campo">
+          <label for="fColonia">Colonia</label>
+          <input type="text" id="fColonia" placeholder="Ej. Centro" required>
+          <span class="error" id="eColonia">Escribe tu colonia.</span>
+        </div>
+        <div class="campo">
+          <label for="fCP">Código postal</label>
+          <input type="text" id="fCP" inputmode="numeric" placeholder="Ej. 06000" required>
+          <span class="error" id="eCP">Escribe tu código postal de 5 dígitos.</span>
+        </div>
+      </div>
+      <div class="dos-col">
+        <div class="campo">
+          <label for="fCiudad">Ciudad</label>
+          <input type="text" id="fCiudad" placeholder="Ej. Ciudad de México" required>
+          <span class="error" id="eCiudad">Escribe tu ciudad.</span>
+        </div>
+        <div class="campo">
+          <label for="fEstado">Estado</label>
+          <input type="text" id="fEstado" placeholder="Ej. CDMX" required>
+          <span class="error" id="eEstado">Escribe tu estado.</span>
+        </div>
+      </div>
+      <p class="total-final">Total a pagar: <span id="totalForm">$0</span> <small style="color:#0d7a3c;">(envío incluido)</small></p>
+      <button type="submit" class="btn-principal">Continuar al pago ➜</button>
+    </form>
+
+    <!-- PASO 2: PAGO + ENVÍO POR WHATSAPP -->
+    <div id="pasoPago" class="paso-oculto">
+      <p style="color:var(--gris); font-size:.95rem;">Tu pedido está casi listo. Para confirmarlo, realiza tu pago con estos datos:</p>
+      <div class="pago-box">
+        <h3>💳 Datos para pagar</h3>
+        <p><strong>Banco:</strong> Spin by OXXO</p>
+        <p><strong>Titular:</strong> Abigail Bustamante Serafín</p>
+        <div class="clabe-fila">
+          <span class="clabe-num" id="clabeNum">728969000175188995</span>
+          <button type="button" class="btn-copiar" id="btnCopiar">📋 Copiar CLABE</button>
+        </div>
+        <p style="color:var(--gris); font-size:.88rem;">Puedes transferir desde tu app bancaria o depositar en cualquier OXXO.</p>
+      </div>
+      <div class="aviso-captura">
+        📸 <strong>Importante:</strong> cuando toques el botón verde, se abrirá WhatsApp con tu pedido ya escrito. <strong>Adjunta ahí mismo, en ese chat, la foto o captura de tu comprobante de depósito</strong> antes de enviar el mensaje. Así confirmamos tu compra de inmediato.
+      </div>
+      <p class="total-final">Total a pagar: <span id="totalPago">$0</span></p>
+      <a class="btn-wa" id="btnEnviarWA" href="#" target="_blank" rel="noopener">✅ Enviar pedido por WhatsApp</a>
+      <p style="text-align:center; margin-top:10px;"><a href="#" id="btnVolver" style="color:var(--azul); font-weight:600;">← Corregir mis datos</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+const PRODUCTOS = [
+  {id:1,  nombre:"Cámara para Auto 360° con 4 Cámaras 1080P", precio:1049, img:"img/camara-360.webp", cat:"camaras", desc:"Graba frente, atrás, lados e interior en Full HD, sin puntos ciegos. Visión nocturna infrarroja, sensor G que protege el video si hay un golpe y modo estacionamiento."},
+  {id:2,  nombre:"Arrancador Portátil para Auto 1500A — 10800 mAh", precio:809, img:"img/arrancador.webp", cat:"emergencia", desc:"Prende tu carro sin pasar corriente y sin pedir ayuda. También sirve como batería de respaldo para cargar tu celular, tablet o cámara por USB."},
+  {id:3,  nombre:"Inflador de Llantas Portátil Recargable con Pantalla Digital y Luz LED", precio:619, img:"img/inflador.webp", cat:"emergencia", desc:"Sin cables ni gasolinera: pantalla LCD con la presión exacta, modos para coche, bici y balones, y luz LED para usarlo de noche."},
+  {id:4,  nombre:"Soporte para Celular con Carga Inalámbrica Rápida 15W", precio:409, img:"img/cargador-inalambrico.webp", cat:"audio", desc:"Se ajusta solo al acercar tu teléfono y lo carga sin cables. Rotación 360°, ideal para usar el GPS todo el día. Se instala en la rejilla de ventilación."},
+  {id:5,  nombre:"Mini Aspiradora Inalámbrica para Auto 8000Pa — Aspira y Sopla", precio:359, img:"img/aspiradora.webp", cat:"exterior", desc:"Succión de 8000Pa para migas, tierra y pelo de mascota. Filtro HEPA lavable (sin gastar en repuestos), carga USB-C y solo 0.38 kg."},
+  {id:6,  nombre:"Localizador GPS 4G Mini para Auto y Moto", precio:795, img:"img/gps.webp", cat:"camaras", desc:"Sabe dónde está tu vehículo desde tu celular. Tamaño mini y discreto, inalámbrico y recargable, sin instalaciones complicadas."},
+  {id:7,  nombre:"Tiras de Luces LED para Auto con Control Remoto", precio:469, img:"img/tiras-led.webp", cat:"iluminacion", desc:"Tiras flexibles para faros y contornos: cambia colores, brillo y modos con el control remoto. Resistentes a la intemperie, instalación con cinta adhesiva."},
+  {id:8,  nombre:"Kit de 4 Luces de Neón Impermeables para Coche", precio:389, img:"img/kit-neon.webp", cat:"iluminacion", desc:"4 tiras (2 × 120 cm + 2 × 90 cm) para chasis o interior, impermeables IP67, con modos que reaccionan al ritmo de tu música. Instalación Plug & Play."},
+  {id:9,  nombre:"Espejo Retrovisor Inteligente 2K con Pantalla IPS de 10″", precio:1429, img:"img/espejo-inteligente.webp", cat:"camaras", desc:"Pantalla táctil gigante con grabación dual (frontal y trasera), guías de asistencia de reversa y visión nocturna. Se monta sobre tu espejo actual."},
+  {id:10, nombre:"Espejo Retrovisor con 2 Cámaras 1080P y Visión Nocturna", precio:599, img:"img/espejo-camaras.webp", cat:"camaras", desc:"Cámara frontal gran angular de 170° y cámara trasera con LED nocturnos, pantalla de 4.3″, sensor G y monitoreo de estacionamiento."},
+  {id:11, nombre:"Autoestéreo 7″ con CarPlay y Android Auto Inalámbrico", precio:1119, img:"img/autoestereo.webp", cat:"audio", desc:"Tu celular en la pantalla del tablero, sin cables: navegación, música y llamadas. Bluetooth 5.0, radio FM y soporte para cámara de reversa."},
+  {id:12, nombre:"Transmisor FM Bluetooth 5.0 con LED RGB", precio:259, img:"img/transmisor-fm.webp", cat:"audio", desc:"Tu música del celular en el estéreo del auto en un minuto, sin cambiar el estéreo. Manos libres, reproduce USB/SD y carga tu celular."},
+  {id:13, nombre:"Funda Impermeable para SUV hasta 4.8 m", precio:629, img:"img/funda-suv.webp", cat:"exterior", desc:"Protege tu camioneta de sol, lluvia, polvo y granizo. Protección UV, 6 tiras reflectantes, correas contra viento y bolsa para guardarla."},
+  {id:14, nombre:"Funda Impermeable para Moto y Bicicleta — Tallas S y L", precio:389, img:"img/funda-moto.webp", cat:"exterior", desc:"Impermeable con repelente UV, cinchos de sujeción y doble costura. Incluye bolsa de almacenamiento. Al pedir, indícanos tu talla y color."},
+  {id:15, nombre:"Parasol Plegable Tipo Paraguas para Auto", precio:289, img:"img/parasol.webp", cat:"exterior", desc:"Se abre como paraguas en segundos dentro del parabrisas: bloquea el calor y los rayos UV y cuida tus vestiduras y tablero del sol."},
+  {id:16, nombre:"Colchón Inflable para Auto con Bomba Incluida", precio:1089, img:"img/colchon.webp", cat:"exterior", desc:"Convierte tu asiento trasero en cama para viajar o acampar. Incluye bomba, almohadas y bolsa; se infla en 2–3 minutos."}
+];
+
+const NUM_WA = "525655829704";
+const grid = document.getElementById("grid");
+const sinResultados = document.getElementById("sinResultados");
+const buscador = document.getElementById("buscador");
+let catActiva = "todos";
+
+function formato(n){ return "$" + n.toLocaleString("es-MX"); }
+
+function render(){
+  const q = buscador.value.trim().toLowerCase();
+  grid.innerHTML = "";
+  let visibles = 0;
+  PRODUCTOS.forEach(p => {
+    const pasaCat = (catActiva === "todos" || p.cat === catActiva);
+    const pasaTexto = (!q || p.nombre.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+    if(!pasaCat || !pasaTexto) return;
+    visibles++;
+    const card = document.createElement("article");
+    card.className = "card";
+    card.innerHTML =
+      '<img src="' + p.img + '" alt="' + p.nombre + '" loading="lazy">' +
+      '<div class="card-body">' +
+        '<h3>' + p.nombre + '</h3>' +
+        '<p class="desc">' + p.desc + '</p>' +
+        '<span class="etiqueta-envio">🚚 ENVÍO INCLUIDO</span>' +
+        '<div class="precio">' + formato(p.precio) + ' <small>MXN · envío incluido</small></div>' +
+        '<button class="btn-comprar" data-id="' + p.id + '">🛒 Comprar</button>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+  sinResultados.style.display = visibles ? "none" : "block";
+  grid.querySelectorAll(".btn-comprar").forEach(b => b.addEventListener("click", () => abrirCheckout(parseInt(b.dataset.id))));
+}
+
+document.getElementById("filtros").addEventListener("click", e => {
+  if(e.target.tagName !== "BUTTON") return;
+  document.querySelectorAll(".filtro").forEach(f => f.classList.remove("activo"));
+  e.target.classList.add("activo");
+  catActiva = e.target.dataset.cat;
+  render();
+});
+buscador.addEventListener("input", render);
+
+/* ===== CHECKOUT ===== */
+const modalFondo = document.getElementById("modalFondo");
+const form = document.getElementById("formPedido");
+const pasoPago = document.getElementById("pasoPago");
+let productoActual = null;
+
+function actualizarTotal(){
+  const cant = Math.max(1, parseInt(document.getElementById("fCantidad").value) || 1);
+  const total = productoActual.precio * cant;
+  document.getElementById("totalForm").textContent = formato(total);
+  document.getElementById("totalPago").textContent = formato(total);
+  return {cant, total};
+}
+
+function abrirCheckout(id){
+  productoActual = PRODUCTOS.find(p => p.id === id);
+  document.getElementById("resumenNombre").textContent = productoActual.nombre;
+  document.getElementById("resumenPrecio").textContent = formato(productoActual.precio);
+  form.classList.remove("paso-oculto");
+  pasoPago.classList.add("paso-oculto");
+  actualizarTotal();
+  modalFondo.classList.add("abierto");
+  document.body.style.overflow = "hidden";
+}
+function cerrarCheckout(){
+  modalFondo.classList.remove("abierto");
+  document.body.style.overflow = "";
+}
+document.getElementById("btnCerrar").addEventListener("click", cerrarCheckout);
+modalFondo.addEventListener("click", e => { if(e.target === modalFondo) cerrarCheckout(); });
+document.getElementById("fCantidad").addEventListener("input", actualizarTotal);
+document.getElementById("btnVolver").addEventListener("click", e => {
+  e.preventDefault();
+  pasoPago.classList.add("paso-oculto");
+  form.classList.remove("paso-oculto");
+});
+
+function campoValido(id, errId, test){
+  const v = document.getElementById(id).value.trim();
+  const ok = test(v);
+  document.getElementById(errId).style.display = ok ? "none" : "block";
+  return ok;
+}
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  let ok = true;
+  ok = campoValido("fNombre","eNombre", v => v.length >= 5) && ok;
+  ok = campoValido("fTelefono","eTelefono", v => v.replace(/\D/g,"").length >= 10) && ok;
+  ok = campoValido("fCalle","eCalle", v => v.length >= 3) && ok;
+  ok = campoValido("fNumero","eNumero", v => v.length >= 1) && ok;
+  ok = campoValido("fColonia","eColonia", v => v.length >= 3) && ok;
+  ok = campoValido("fCiudad","eCiudad", v => v.length >= 3) && ok;
+  ok = campoValido("fEstado","eEstado", v => v.length >= 2) && ok;
+  ok = campoValido("fCP","eCP", v => /^\d{5}$/.test(v)) && ok;
+  if(!ok) return;
+
+  const {cant, total} = actualizarTotal();
+  const g = id => document.getElementById(id).value.trim();
+  const direccion = g("fCalle") + " " + g("fNumero") + ", Col. " + g("fColonia") + ", " + g("fCiudad") + ", " + g("fEstado") + ", C.P. " + g("fCP");
+  const mensaje =
+    "🛒 *NUEVO PEDIDO — AutoAccesorios MX*\n" +
+    "━━━━━━━━━━━━━━━\n" +
+    "📦 *Producto:* " + productoActual.nombre + "\n" +
+    "🔢 *Cantidad:* " + cant + "\n" +
+    "💲 *Precio unitario:* " + formato(productoActual.precio) + " (envío incluido)\n" +
+    "💰 *TOTAL A PAGAR:* " + formato(total) + "\n" +
+    "━━━━━━━━━━━━━━━\n" +
+    "👤 *Nombre:* " + g("fNombre") + "\n" +
+    "📱 *Teléfono:* " + g("fTelefono") + "\n" +
+    "🏠 *Dirección de entrega:*\n" + direccion + "\n" +
+    "━━━━━━━━━━━━━━━\n" +
+    "📸 En este mismo chat te adjunto la captura de mi depósito para confirmar mi pedido. ¡Gracias!";
+  document.getElementById("btnEnviarWA").href = "https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(mensaje);
+  form.classList.add("paso-oculto");
+  pasoPago.classList.remove("paso-oculto");
+  modalFondo.scrollTop = 0;
+});
+
+document.getElementById("btnCopiar").addEventListener("click", function(){
+  const texto = document.getElementById("clabeNum").textContent.trim();
+  const btn = this;
+  const hecho = () => { btn.textContent = "✅ ¡Copiada!"; setTimeout(() => btn.textContent = "📋 Copiar CLABE", 2200); };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(texto).then(hecho).catch(() => { copiarManual(texto); hecho(); });
+  } else { copiarManual(texto); hecho(); }
+});
+function copiarManual(texto){
+  const ta = document.createElement("textarea");
+  ta.value = texto; document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); } catch(e){}
+  document.body.removeChild(ta);
+}
+
+render();
+</script>
+</body>
+</html>
