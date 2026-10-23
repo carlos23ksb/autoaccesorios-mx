@@ -2,6 +2,7 @@
 <html lang="es-MX">
 <head>
 <meta charset="UTF-8">
+<meta name="google-site-verification" content="mWF8yHF8KtF9EaatCp0OSAseExP3PzDpd43bcGW9JAM" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AutoAccesorios MX — Accesorios para tu auto con envío incluido a todo México</title>
 <meta name="description" content="Tienda en línea de accesorios para auto: cámaras 360°, arrancadores, infladores, espejos con cámara, GPS, luces LED y más. Todos los precios incluyen envío a todo México. Pide por WhatsApp y paga por transferencia o depósito OXXO.">
@@ -15,6 +16,7 @@
 <meta property="og:locale" content="es_MX">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/webp" href="img/logo.webp">
+
 <style>
 :root{
   --azul:#0057e7; --azul-oscuro:#0a2540; --naranja:#ff7a1a; --naranja-oscuro:#e85d00;
@@ -26,7 +28,6 @@ html{scroll-behavior:smooth;}
 body{font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif; background:var(--fondo); color:var(--texto); line-height:1.5;}
 img{max-width:100%; display:block;}
 a{text-decoration:none;}
-/* Encabezado */
 header{background:#fff; box-shadow:0 2px 10px rgba(10,37,64,.08); position:sticky; top:0; z-index:50;}
 .header-in{max-width:1180px; margin:0 auto; padding:10px 16px; display:flex; align-items:center; gap:12px;}
 .logo{width:46px; height:46px; border-radius:50%; object-fit:cover; border:2px solid var(--azul);}
@@ -34,15 +35,13 @@ header{background:#fff; box-shadow:0 2px 10px rgba(10,37,64,.08); position:stick
 .marca span{color:var(--naranja);}
 .header-wa{margin-left:auto; background:var(--verde); color:#fff; font-weight:700; padding:9px 14px; border-radius:999px; font-size:.9rem; display:inline-flex; align-items:center; gap:6px; white-space:nowrap;}
 .header-wa:hover{filter:brightness(1.07);}
-/* Hero */
-.hero{background:linear-gradient(120deg,var(--azul-oscuro) 0%,var(--azul) 55%,#2f8bff 100%); color:#fff; }
+.hero{background:linear-gradient(120deg,var(--azul-oscuro) 0%,var(--azul) 55%,#2f8bff 100%); color:#fff;}
 .hero-in{max-width:1180px; margin:0 auto; padding:38px 16px 30px; text-align:center;}
 .hero h1{font-size:2rem; line-height:1.15; font-weight:900;}
 .hero h1 em{font-style:normal; color:#ffb066;}
 .hero p{margin:12px auto 0; max-width:640px; font-size:1.05rem; color:#dbe9ff;}
 .beneficios{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px;}
 .beneficio{background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); padding:8px 14px; border-radius:999px; font-weight:600; font-size:.9rem;}
-/* Buscador y filtros */
 main{max-width:1180px; margin:0 auto; padding:22px 16px 40px;}
 .buscador{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:16px;}
 .buscador input[type=search]{flex:1 1 240px; padding:12px 16px; border:2px solid var(--borde); border-radius:999px; font-size:1rem; background:#fff; outline:none;}
@@ -50,7 +49,6 @@ main{max-width:1180px; margin:0 auto; padding:22px 16px 40px;}
 .filtros{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;}
 .filtro{border:2px solid var(--borde); background:#fff; color:var(--texto); padding:8px 16px; border-radius:999px; font-weight:600; cursor:pointer; font-size:.92rem;}
 .filtro.activo{background:var(--azul); border-color:var(--azul); color:#fff;}
-/* Tarjetas */
 .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:18px;}
 .card{background:#fff; border:1px solid var(--borde); border-radius:var(--radio); overflow:hidden; box-shadow:var(--sombra); display:flex; flex-direction:column;}
 .card img{width:100%; height:210px; object-fit:cover; background:#eef2f8;}
@@ -63,7 +61,6 @@ main{max-width:1180px; margin:0 auto; padding:22px 16px 40px;}
 .btn-comprar{background:linear-gradient(180deg,var(--naranja),var(--naranja-oscuro)); color:#fff; border:none; border-radius:10px; padding:13px; font-size:1rem; font-weight:800; cursor:pointer; width:100%;}
 .btn-comprar:hover{filter:brightness(1.06);}
 .sin-resultados{display:none; text-align:center; color:var(--gris); padding:30px 0; font-size:1.05rem;}
-/* Secciones */
 section.bloque{margin-top:44px;}
 section.bloque h2{font-size:1.5rem; color:var(--azul-oscuro); margin-bottom:14px;}
 .pasos{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px;}
@@ -74,14 +71,11 @@ section.bloque h2{font-size:1.5rem; color:var(--azul-oscuro); margin-bottom:14px
 details.faq{background:#fff; border:1px solid var(--borde); border-radius:10px; padding:14px 16px; margin-bottom:10px;}
 details.faq summary{font-weight:700; cursor:pointer; color:var(--azul-oscuro);}
 details.faq p{margin-top:8px; color:var(--gris); font-size:.95rem;}
-/* Pie */
 footer{background:var(--azul-oscuro); color:#cfe0f5; margin-top:50px;}
 .footer-in{max-width:1180px; margin:0 auto; padding:28px 16px; text-align:center; font-size:.92rem;}
 footer .marca{color:#fff;}
-/* WhatsApp flotante */
 .wa-flotante{position:fixed; right:16px; bottom:16px; z-index:60; background:var(--verde); color:#fff; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,.25); font-size:1.7rem;}
 .wa-flotante:hover{filter:brightness(1.08);}
-/* Modal checkout */
 .modal-fondo{display:none; position:fixed; inset:0; background:rgba(10,25,47,.62); z-index:100; padding:14px; overflow-y:auto;}
 .modal-fondo.abierto{display:block;}
 .modal{background:#fff; border-radius:16px; max-width:520px; margin:20px auto; padding:22px; position:relative;}
@@ -143,6 +137,7 @@ footer .marca{color:#fff;}
   <div class="buscador">
     <input type="search" id="buscador" placeholder="🔎 Busca un producto… (ej. cámara, LED, funda)" aria-label="Buscar productos">
   </div>
+
   <div class="filtros" id="filtros">
     <button class="filtro activo" data-cat="todos">Todos</button>
     <button class="filtro" data-cat="camaras">Cámaras y seguridad</button>
@@ -211,12 +206,12 @@ footer .marca{color:#fff;}
     <button class="cerrar" id="btnCerrar" aria-label="Cerrar">×</button>
     <h2 id="modalTitulo">Completar pedido</h2>
 
-    <!-- PASO 1: FORMULARIO -->
     <form id="formPedido" novalidate>
       <div class="resumen-prod">
         <strong id="resumenNombre"></strong><br>
         Precio unitario: <strong id="resumenPrecio"></strong> <span style="color:#0d7a3c; font-weight:700;">(envío incluido)</span>
       </div>
+
       <div class="dos-col">
         <div class="campo">
           <label for="fCantidad">Cantidad</label>
@@ -228,11 +223,13 @@ footer .marca{color:#fff;}
           <span class="error" id="eTelefono">Escribe un teléfono válido de 10 dígitos.</span>
         </div>
       </div>
+
       <div class="campo">
         <label for="fNombre">Nombre completo</label>
         <input type="text" id="fNombre" placeholder="Nombre y apellidos" required>
         <span class="error" id="eNombre">Escribe tu nombre completo.</span>
       </div>
+
       <div class="dos-col">
         <div class="campo">
           <label for="fCalle">Calle</label>
@@ -245,6 +242,7 @@ footer .marca{color:#fff;}
           <span class="error" id="eNumero">Escribe el número de tu casa.</span>
         </div>
       </div>
+
       <div class="dos-col">
         <div class="campo">
           <label for="fColonia">Colonia</label>
@@ -257,6 +255,7 @@ footer .marca{color:#fff;}
           <span class="error" id="eCP">Escribe tu código postal de 5 dígitos.</span>
         </div>
       </div>
+
       <div class="dos-col">
         <div class="campo">
           <label for="fCiudad">Ciudad</label>
@@ -269,13 +268,14 @@ footer .marca{color:#fff;}
           <span class="error" id="eEstado">Escribe tu estado.</span>
         </div>
       </div>
+
       <p class="total-final">Total a pagar: <span id="totalForm">$0</span> <small style="color:#0d7a3c;">(envío incluido)</small></p>
       <button type="submit" class="btn-principal">Continuar al pago ➜</button>
     </form>
 
-    <!-- PASO 2: PAGO + ENVÍO POR WHATSAPP -->
     <div id="pasoPago" class="paso-oculto">
       <p style="color:var(--gris); font-size:.95rem;">Tu pedido está casi listo. Para confirmarlo, realiza tu pago con estos datos:</p>
+
       <div class="pago-box">
         <h3>💳 Datos para pagar</h3>
         <p><strong>Banco:</strong> Spin by OXXO</p>
@@ -286,9 +286,11 @@ footer .marca{color:#fff;}
         </div>
         <p style="color:var(--gris); font-size:.88rem;">Puedes transferir desde tu app bancaria o depositar en cualquier OXXO.</p>
       </div>
+
       <div class="aviso-captura">
         📸 <strong>Importante:</strong> cuando toques el botón verde, se abrirá WhatsApp con tu pedido ya escrito. <strong>Adjunta ahí mismo, en ese chat, la foto o captura de tu comprobante de depósito</strong> antes de enviar el mensaje. Así confirmamos tu compra de inmediato.
       </div>
+
       <p class="total-final">Total a pagar: <span id="totalPago">$0</span></p>
       <a class="btn-wa" id="btnEnviarWA" href="#" target="_blank" rel="noopener">✅ Enviar pedido por WhatsApp</a>
       <p style="text-align:center; margin-top:10px;"><a href="#" id="btnVolver" style="color:var(--azul); font-weight:600;">← Corregir mis datos</a></p>
@@ -298,56 +300,56 @@ footer .marca{color:#fff;}
 
 <script>
 const PRODUCTOS = [
-  {id:1,  nombre:"Cámara para Auto 360° con 4 Cámaras 1080P", precio:1049, img:"img/camara-360.webp", cat:"camaras", desc:"Graba frente, atrás, lados e interior en Full HD, sin puntos ciegos. Visión nocturna infrarroja, sensor G que protege el video si hay un golpe y modo estacionamiento."},
-  {id:2,  nombre:"Arrancador Portátil para Auto 1500A — 10800 mAh", precio:809, img:"img/arrancador.webp", cat:"emergencia", desc:"Prende tu carro sin pasar corriente y sin pedir ayuda. También sirve como batería de respaldo para cargar tu celular, tablet o cámara por USB."},
-  {id:3,  nombre:"Inflador de Llantas Portátil Recargable con Pantalla Digital y Luz LED", precio:619, img:"img/inflador.webp", cat:"emergencia", desc:"Sin cables ni gasolinera: pantalla LCD con la presión exacta, modos para coche, bici y balones, y luz LED para usarlo de noche."},
-  {id:4,  nombre:"Soporte para Celular con Carga Inalámbrica Rápida 15W", precio:409, img:"img/cargador-inalambrico.webp", cat:"audio", desc:"Se ajusta solo al acercar tu teléfono y lo carga sin cables. Rotación 360°, ideal para usar el GPS todo el día. Se instala en la rejilla de ventilación."},
-  {id:5,  nombre:"Mini Aspiradora Inalámbrica para Auto 8000Pa — Aspira y Sopla", precio:359, img:"img/aspiradora.webp", cat:"exterior", desc:"Succión de 8000Pa para migas, tierra y pelo de mascota. Filtro HEPA lavable (sin gastar en repuestos), carga USB-C y solo 0.38 kg."},
-  {id:6,  nombre:"Localizador GPS 4G Mini para Auto y Moto", precio:795, img:"img/gps.webp", cat:"camaras", desc:"Sabe dónde está tu vehículo desde tu celular. Tamaño mini y discreto, inalámbrico y recargable, sin instalaciones complicadas."},
-  {id:7,  nombre:"Tiras de Luces LED para Auto con Control Remoto", precio:469, img:"img/tiras-led.webp", cat:"iluminacion", desc:"Tiras flexibles para faros y contornos: cambia colores, brillo y modos con el control remoto. Resistentes a la intemperie, instalación con cinta adhesiva."},
-  {id:8,  nombre:"Kit de 4 Luces de Neón Impermeables para Coche", precio:389, img:"img/kit-neon.webp", cat:"iluminacion", desc:"4 tiras (2 × 120 cm + 2 × 90 cm) para chasis o interior, impermeables IP67, con modos que reaccionan al ritmo de tu música. Instalación Plug & Play."},
-  {id:9,  nombre:"Espejo Retrovisor Inteligente 2K con Pantalla IPS de 10″", precio:1429, img:"img/espejo-inteligente.webp", cat:"camaras", desc:"Pantalla táctil gigante con grabación dual (frontal y trasera), guías de asistencia de reversa y visión nocturna. Se monta sobre tu espejo actual."},
-  {id:10, nombre:"Espejo Retrovisor con 2 Cámaras 1080P y Visión Nocturna", precio:599, img:"img/espejo-camaras.webp", cat:"camaras", desc:"Cámara frontal gran angular de 170° y cámara trasera con LED nocturnos, pantalla de 4.3″, sensor G y monitoreo de estacionamiento."},
-  {id:11, nombre:"Autoestéreo 7″ con CarPlay y Android Auto Inalámbrico", precio:1119, img:"img/autoestereo.webp", cat:"audio", desc:"Tu celular en la pantalla del tablero, sin cables: navegación, música y llamadas. Bluetooth 5.0, radio FM y soporte para cámara de reversa."},
-  {id:12, nombre:"Transmisor FM Bluetooth 5.0 con LED RGB", precio:259, img:"img/transmisor-fm.webp", cat:"audio", desc:"Tu música del celular en el estéreo del auto en un minuto, sin cambiar el estéreo. Manos libres, reproduce USB/SD y carga tu celular."},
-  {id:13, nombre:"Funda Impermeable para SUV hasta 4.8 m", precio:629, img:"img/funda-suv.webp", cat:"exterior", desc:"Protege tu camioneta de sol, lluvia, polvo y granizo. Protección UV, 6 tiras reflectantes, correas contra viento y bolsa para guardarla."},
-  {id:14, nombre:"Funda Impermeable para Moto y Bicicleta — Tallas S y L", precio:389, img:"img/funda-moto.webp", cat:"exterior", desc:"Impermeable con repelente UV, cinchos de sujeción y doble costura. Incluye bolsa de almacenamiento. Al pedir, indícanos tu talla y color."},
-  {id:15, nombre:"Parasol Plegable Tipo Paraguas para Auto", precio:289, img:"img/parasol.webp", cat:"exterior", desc:"Se abre como paraguas en segundos dentro del parabrisas: bloquea el calor y los rayos UV y cuida tus vestiduras y tablero del sol."},
-  {id:16, nombre:"Colchón Inflable para Auto con Bomba Incluida", precio:1089, img:"img/colchon.webp", cat:"exterior", desc:"Convierte tu asiento trasero en cama para viajar o acampar. Incluye bomba, almohadas y bolsa; se infla en 2–3 minutos."},
-  {id:17, nombre:"Cámara para Auto 360° WiFi 1080P con WDR — 4 Canales", precio:869, img:"img/camara-360-wifi.webp", cat:"camaras", desc:"Cuatro canales que graban frente, trasera y ambos lados a la vez, sin puntos ciegos. WiFi para ver y descargar los videos desde tu celular y WDR para imagen clara con sol o sombra."},
-  {id:18, nombre:"Dash Cam 4K de 3 Canales con GPS y WiFi 5GHz", precio:1639, img:"img/dashcam-4k.webp", cat:"camaras", desc:"Frente en 4K, interior y trasera en 1080P: la evidencia más nítida. GPS que registra ruta y velocidad, WiFi 5GHz para descargar rápido y visión nocturna en cabina, ideal para Uber y DiDi."},
-  {id:19, nombre:"Cámara de Tablero 360° 1080P de 4 Canales con GPS", precio:1049, img:"img/dashcam-360-gps.webp", cat:"camaras", desc:"Sistema 360° real con 4 cámaras Full HD, GPS integrado y WiFi 5GHz. Visión nocturna con 8 LED, sensor G y modo estacionamiento para que tu auto nunca quede sin testigo."},
-  {id:20, nombre:"Dash Cam WiFi de 4 Cámaras 1080P con Sensor G", precio:849, img:"img/dashcam-4-camaras.webp", cat:"camaras", desc:"Graba frente, lados y reversa al mismo tiempo. Sensor G que bloquea el video si hay un golpe, líneas guía al estacionarte y modo vigilancia cuando dejas el auto."},
-  {id:21, nombre:"Espejo Retrovisor 360° con Pantalla de 12″ y 4 Cámaras WiFi", precio:1049, img:"img/espejo-360.webp", cat:"camaras", desc:"Pantalla IPS gigante de 12 pulgadas en tu espejo con 4 cámaras: frente, interior, lados y trasera. WiFi con app y visión nocturna infrarroja automática."},
-  {id:22, nombre:"Dash Cam WiFi de 3 Lentes 1080P con Pantalla de 3″", precio:709, img:"img/dashcam-3-lentes.webp", cat:"camaras", desc:"Frente e interior en Full HD con pantalla de 3 pulgadas. WiFi para bajar los videos al celular, visión nocturna infrarroja y sensor G: el copiloto perfecto para conductores de plataforma."},
-  {id:23, nombre:"Dash Cam Doble 1080P Frontal e Interior con Pantalla de 2″", precio:559, img:"img/dashcam-doble.webp", cat:"camaras", desc:"Compacta y discreta detrás del espejo: graba el camino y la cabina en 1080P con visión nocturna de 4 LED IR. Monitor de estacionamiento y sensor G incluidos."},
-  {id:24, nombre:"Cámara DVR para Auto de 3 Lentes HD 1080P", precio:449, img:"img/dvr-3-lentes.webp", cat:"camaras", desc:"Grabación frontal e interior en HD con pantalla LCD, visión nocturna y detección de movimiento. Se instala en minutos y graba en bucle sin que te preocupes por la memoria."},
-  {id:25, nombre:"Cámara de Seguridad para Auto Full HD con Sensor de Movimiento", precio:379, img:"img/camara-sensor.webp", cat:"camaras", desc:"Empieza a grabar sola cuando detecta movimiento cerca de tu auto. Full HD 1080P, incluye soporte y cargador de auto; acepta memoria de hasta 32 GB."},
-  {id:26, nombre:"Inversor de Corriente 1000W para Auto", precio:949, img:"img/inversor-1000w.webp", cat:"emergencia", desc:"Convierte la batería de tu auto en un contacto de casa: conecta laptop, herramientas y aparatos de hasta 1000W. 2 puertos USB y protección contra sobrecarga y cortocircuito."},
-  {id:27, nombre:"Inversor Automotriz 300W de 12V a 110V", precio:659, img:"img/inversor-300w.webp", cat:"emergencia", desc:"Energía de casa en tu auto para laptop, cargadores y aparatos de hasta 300W. Compacto, con puerto USB y protecciones de seguridad."},
-  {id:28, nombre:"Inversor con Cargador UPS Volta 500W", precio:649, img:"img/inversor-500w.webp", cat:"emergencia", desc:"Inversor 500W de 12V a 110V con función UPS: mantiene tus aparatos encendidos y carga la batería. Puertos USB y contactos para usar varios equipos a la vez."},
-  {id:29, nombre:"Llave de Impacto Inalámbrica 20V MAX con Luz Frontal", precio:1349, img:"img/llave-impacto.webp", cat:"emergencia", desc:"Quita y pone tuercas de llanta en segundos, sin esfuerzo y sin cables. Batería de litio 20V MAX, luz frontal para trabajar de noche e incluye dado y accesorios."},
-  {id:30, nombre:"Llave de Impacto Inalámbrica de 1/2″ 20V MAX", precio:1429, img:"img/llave-impacto-media.webp", cat:"emergencia", desc:"Cuadro de 1/2 pulgada para dados estándar, gatillo de velocidad variable y selector para apretar o aflojar. La herramienta que te salva en un cambio de llanta en carretera."},
-  {id:31, nombre:"Aspiradora de Emergencia 6 en 1 para Auto", precio:259, img:"img/aspiradora-emergencia.webp", cat:"emergencia", desc:"Aspira y sopla, y además trae cortador de cinturón y rompevidrios de emergencia. Inalámbrica, compacta para la guantera y con 5 accesorios de limpieza."},
-  {id:32, nombre:"Inflallantas en Aerosol 320 ml para Autos Compactos", precio:259, img:"img/inflallantas.webp", cat:"emergencia", desc:"Ponchadura resuelta en minutos sin gato ni refacción: agita, conecta a la válvula y sigue tu camino. Tamaño compacto para traerlo siempre en la cajuela."},
-  {id:33, nombre:"Adaptador Inalámbrico CarPlay y Android Auto 4 en 1", precio:769, img:"img/adaptador-carplay.webp", cat:"audio", desc:"Convierte el CarPlay de tu auto en inalámbrico: también Android Auto, AirPlay y Miracast en un solo adaptador USB. Mapas, música y llamadas en tu pantalla, sin cables."},
-  {id:34, nombre:"Autoestéreo 7″ Doble DIN con CarPlay y Android Auto Inalámbrico", precio:1149, img:"img/autoestereo-doble-din.webp", cat:"audio", desc:"Pantalla IPS HD táctil de 7 pulgadas con CarPlay y Android Auto sin cables, Bluetooth 5.0, radio FM y entrada para cámara de reversa. Moderniza cualquier tablero doble DIN."},
-  {id:35, nombre:"Transmisor Bluetooth 5.0 para Auto con 2 USB y Micro SD", precio:269, img:"img/transmisor-bt.webp", cat:"audio", desc:"Música de tu celular en el estéreo de cualquier auto por FM, con Bluetooth 5.0. Dos puertos USB para cargar y ranura Micro SD para tu música."},
-  {id:36, nombre:"Par de Intercomunicadores Bluetooth para Casco de Moto", precio:1079, img:"img/intercomunicador-casco.webp", cat:"audio", desc:"Habla con tu acompañante u otro motociclista hasta 300 m, con hasta 30 horas de batería y resistencia al agua IP67. Incluye dos tipos de micrófono para casco cerrado o abierto."},
-  {id:37, nombre:"Auricular Bluetooth para Casco de Moto con Luz RGB", precio:519, img:"img/auricular-casco.webp", cat:"audio", desc:"Música y llamadas manos libres dentro de tu casco con Bluetooth 5.1 y reducción de ruido. Botones grandes fáciles de usar con guantes y aro luminoso RGB."},
-  {id:38, nombre:"Auriculares Bluetooth 5.3 para Casco de Motocicleta", precio:329, img:"img/auriculares-casco.webp", cat:"audio", desc:"Sonido estéreo y micrófono para llamadas sin quitarte el casco. Planos y cómodos, se instalan dentro del casco en minutos."},
-  {id:39, nombre:"Multicargador para Auto QC3.0 y PD 20W — 4 en 1", precio:229, img:"img/multicargador.webp", cat:"audio", desc:"Carga hasta 4 dispositivos a la vez con carga rápida QC3.0 y PD 20W por USB-C. Ideal para viajes familiares o para repartidores y conductores de aplicación."},
-  {id:40, nombre:"Cable Cargador Magnético 65W de Carga Rápida para Auto", precio:259, img:"img/cable-magnetico.webp", cat:"audio", desc:"Cable trenzado que se recoge solo con imanes: nada de cables enredados en la consola. Carga rápida de 65W con chip inteligente que protege la batería de tu celular."},
-  {id:41, nombre:"Soporte para Celular con Carga Inalámbrica 10W y Sujeción Automática", precio:289, img:"img/soporte-inalambrico-10w.webp", cat:"audio", desc:"Acerca tu celular y el soporte lo abraza solo, cargándolo sin cables. Sujeción automática con sensor y liberación con un toque."},
-  {id:42, nombre:"Soporte para Celular con Succión Extra Fuerte y Brazo Articulado", precio:249, img:"img/soporte-succion.webp", cat:"audio", desc:"Base de succión con adhesivo estabilizado que no se cae ni en caminos feos. Brazo articulado multiángulo para dejar el celular justo donde lo necesitas."},
-  {id:43, nombre:"Soporte para Celular 980° con Ventosa y Bloqueo Automático", precio:229, img:"img/soporte-ventosa.webp", cat:"audio", desc:"Giro total de 980° y ventosa ultra fuerte que resiste hasta 80 °C. Bloqueo automático al colocar el celular y liberación en un segundo."},
-  {id:44, nombre:"Soporte Antideslizante para Celular en Moto o Bici", precio:199, img:"img/soporte-moto.webp", cat:"audio", desc:"Agarre reforzado para pantallas de 4.5 a 6.8 pulgadas: tu celular firme en la moto o la bici, sin vibraciones ni sustos."},
-  {id:45, nombre:"Tiras LED RGB para Interior de Auto — 48 LED con Control y App", precio:259, img:"img/tiras-rgb-interior.webp", cat:"iluminacion", desc:"Kit de 4 tiras con 48 LED RGB para pies y tablero: cambia colores y efectos con el control remoto o desde la app. Se conecta al encendedor y se instala en 5 minutos."},
-  {id:46, nombre:"Hidrolavadora Inalámbrica 24V para Auto con Batería de Litio", precio:749, img:"img/hidrolavadora.webp", cat:"exterior", desc:"Lava tu auto donde sea, sin manguera ni contacto: succiona el agua de una cubeta. 35 bar de presión, batería de 20–30 minutos, boquillas intercambiables y lata de espuma incluida."},
-  {id:47, nombre:"Aspiradora y Soplador Inalámbrico 2 en 1 para Auto", precio:359, img:"img/aspiradora-soplador.webp", cat:"exterior", desc:"Aspira el interior y sopla el polvo de los rincones imposibles con un solo equipo. Batería de 4000 mAh para 40 minutos, con boquillas de succión, soplado e inflado."},
-  {id:48, nombre:"Carro Plegable para Mover tu Motocicleta — hasta 500 kg", precio:289, img:"img/carro-moto.webp", cat:"exterior", desc:"Mueve tu moto en espacios apretados sin esfuerzo: ruedas multidireccionales y estructura de acero plegable. Ideal para cocheras y talleres pequeños."},
-  {id:49, nombre:"Organizadores de Asiento para Auto — Par, Color Café", precio:209, img:"img/organizador-asiento.webp", cat:"exterior", desc:"Rellena el hueco entre el asiento y la consola: ya no se caen el celular, las llaves ni las monedas. Cuero PU elegante con compartimentos y espacio para el cinturón."},
-  {id:50, nombre:"Limpiador de Frenos para Automóviles 525 ml", precio:269, img:"img/limpiador-frenos.webp", cat:"exterior", desc:"Quita polvo de freno, grasa y suciedad de discos y calipers en segundos. Acción rápida, se evapora sin dejar residuos y deja tus frenos trabajando al 100."}
+  {id:1,nombre:"Cámara para Auto 360° con 4 Cámaras 1080P",precio:1049,img:"img/camara-360.webp",cat:"camaras",desc:"Graba frente, atrás, lados e interior en Full HD, sin puntos ciegos. Visión nocturna infrarroja, sensor G que protege el video si hay un golpe y modo estacionamiento."},
+  {id:2,nombre:"Arrancador Portátil para Auto 1500A — 10800 mAh",precio:809,img:"img/arrancador.webp",cat:"emergencia",desc:"Prende tu carro sin pasar corriente y sin pedir ayuda. También sirve como batería de respaldo para cargar tu celular, tablet o cámara por USB."},
+  {id:3,nombre:"Inflador de Llantas Portátil Recargable con Pantalla Digital y Luz LED",precio:619,img:"img/inflador.webp",cat:"emergencia",desc:"Sin cables ni gasolinera: pantalla LCD con la presión exacta, modos para coche, bici y balones, y luz LED para usarlo de noche."},
+  {id:4,nombre:"Soporte para Celular con Carga Inalámbrica Rápida 15W",precio:409,img:"img/cargador-inalambrico.webp",cat:"audio",desc:"Se ajusta solo al acercar tu teléfono y lo carga sin cables. Rotación 360°, ideal para usar el GPS todo el día. Se instala en la rejilla de ventilación."},
+  {id:5,nombre:"Mini Aspiradora Inalámbrica para Auto 8000Pa — Aspira y Sopla",precio:359,img:"img/aspiradora.webp",cat:"exterior",desc:"Succión de 8000Pa para migas, tierra y pelo de mascota. Filtro HEPA lavable (sin gastar en repuestos), carga USB-C y solo 0.38 kg."},
+  {id:6,nombre:"Localizador GPS 4G Mini para Auto y Moto",precio:795,img:"img/gps.webp",cat:"camaras",desc:"Sabe dónde está tu vehículo desde tu celular. Tamaño mini y discreto, inalámbrico y recargable, sin instalaciones complicadas."},
+  {id:7,nombre:"Tiras de Luces LED para Auto con Control Remoto",precio:469,img:"img/tiras-led.webp",cat:"iluminacion",desc:"Tiras flexibles para faros y contornos: cambia colores, brillo y modos con el control remoto. Resistentes a la intemperie, instalación con cinta adhesiva."},
+  {id:8,nombre:"Kit de 4 Luces de Neón Impermeables para Coche",precio:389,img:"img/kit-neon.webp",cat:"iluminacion",desc:"4 tiras (2 × 120 cm + 2 × 90 cm) para chasis o interior, impermeables IP67, con modos que reaccionan al ritmo de tu música. Instalación Plug & Play."},
+  {id:9,nombre:"Espejo Retrovisor Inteligente 2K con Pantalla IPS de 10″",precio:1429,img:"img/espejo-inteligente.webp",cat:"camaras",desc:"Pantalla táctil gigante con grabación dual (frontal y trasera), guías de asistencia de reversa y visión nocturna. Se monta sobre tu espejo actual."},
+  {id:10,nombre:"Espejo Retrovisor con 2 Cámaras 1080P y Visión Nocturna",precio:599,img:"img/espejo-camaras.webp",cat:"camaras",desc:"Cámara frontal gran angular de 170° y cámara trasera con LED nocturnos, pantalla de 4.3″, sensor G y monitoreo de estacionamiento."},
+  {id:11,nombre:"Autoestéreo 7″ con CarPlay y Android Auto Inalámbrico",precio:1119,img:"img/autoestereo.webp",cat:"audio",desc:"Tu celular en la pantalla del tablero, sin cables: navegación, música y llamadas. Bluetooth 5.0, radio FM y soporte para cámara de reversa."},
+  {id:12,nombre:"Transmisor FM Bluetooth 5.0 con LED RGB",precio:259,img:"img/transmisor-fm.webp",cat:"audio",desc:"Tu música del celular en el estéreo del auto en un minuto, sin cambiar el estéreo. Manos libres, reproduce USB/SD y carga tu celular."},
+  {id:13,nombre:"Funda Impermeable para SUV hasta 4.8 m",precio:629,img:"img/funda-suv.webp",cat:"exterior",desc:"Protege tu camioneta de sol, lluvia, polvo y granizo. Protección UV, 6 tiras reflectantes, correas contra viento y bolsa para guardarla."},
+  {id:14,nombre:"Funda Impermeable para Moto y Bicicleta — Tallas S y L",precio:389,img:"img/funda-moto.webp",cat:"exterior",desc:"Impermeable con repelente UV, cinchos de sujeción y doble costura. Incluye bolsa de almacenamiento. Al pedir, indícanos tu talla y color."},
+  {id:15,nombre:"Parasol Plegable Tipo Paraguas para Auto",precio:289,img:"img/parasol.webp",cat:"exterior",desc:"Se abre como paraguas en segundos dentro del parabrisas: bloquea el calor y los rayos UV y cuida tus vestiduras y tablero del sol."},
+  {id:16,nombre:"Colchón Inflable para Auto con Bomba Incluida",precio:1089,img:"img/colchon.webp",cat:"exterior",desc:"Convierte tu asiento trasero en cama para viajar o acampar. Incluye bomba, almohadas y bolsa; se infla en 2–3 minutos."},
+  {id:17,nombre:"Cámara para Auto 360° WiFi 1080P con WDR — 4 Canales",precio:869,img:"img/camara-360-wifi.webp",cat:"camaras",desc:"Cuatro canales que graban frente, trasera y ambos lados a la vez, sin puntos ciegos. WiFi para ver y descargar los videos desde tu celular y WDR para imagen clara con sol o sombra."},
+  {id:18,nombre:"Dash Cam 4K de 3 Canales con GPS y WiFi 5GHz",precio:1639,img:"img/dashcam-4k.webp",cat:"camaras",desc:"Frente en 4K, interior y trasera en 1080P: la evidencia más nítida. GPS que registra ruta y velocidad, WiFi 5GHz para descargar rápido y visión nocturna en cabina, ideal para Uber y DiDi."},
+  {id:19,nombre:"Cámara de Tablero 360° 1080P de 4 Canales con GPS",precio:1049,img:"img/dashcam-360-gps.webp",cat:"camaras",desc:"Sistema 360° real con 4 cámaras Full HD, GPS integrado y WiFi 5GHz. Visión nocturna con 8 LED, sensor G y modo estacionamiento para que tu auto nunca quede sin testigo."},
+  {id:20,nombre:"Dash Cam WiFi de 4 Cámaras 1080P con Sensor G",precio:849,img:"img/dashcam-4-camaras.webp",cat:"camaras",desc:"Graba frente, lados y reversa al mismo tiempo. Sensor G que bloquea el video si hay un golpe, líneas guía al estacionarte y modo vigilancia cuando dejas el auto."},
+  {id:21,nombre:"Espejo Retrovisor 360° con Pantalla de 12″ y 4 Cámaras WiFi",precio:1049,img:"img/espejo-360.webp",cat:"camaras",desc:"Pantalla IPS gigante de 12 pulgadas en tu espejo con 4 cámaras: frente, interior, lados y trasera. WiFi con app y visión nocturna infrarroja automática."},
+  {id:22,nombre:"Dash Cam WiFi de 3 Lentes 1080P con Pantalla de 3″",precio:709,img:"img/dashcam-3-lentes.webp",cat:"camaras",desc:"Frente e interior en Full HD con pantalla de 3 pulgadas. WiFi para bajar los videos al celular, visión nocturna infrarroja y sensor G: el copiloto perfecto para conductores de plataforma."},
+  {id:23,nombre:"Dash Cam Doble 1080P Frontal e Interior con Pantalla de 2″",precio:559,img:"img/dashcam-doble.webp",cat:"camaras",desc:"Compacta y discreta detrás del espejo: graba el camino y la cabina en 1080P con visión nocturna de 4 LED IR. Monitor de estacionamiento y sensor G incluidos."},
+  {id:24,nombre:"Cámara DVR para Auto de 3 Lentes HD 1080P",precio:449,img:"img/dvr-3-lentes.webp",cat:"camaras",desc:"Grabación frontal e interior en HD con pantalla LCD, visión nocturna y detección de movimiento. Se instala en minutos y graba en bucle sin que te preocupes por la memoria."},
+  {id:25,nombre:"Cámara de Seguridad para Auto Full HD con Sensor de Movimiento",precio:379,img:"img/camara-sensor.webp",cat:"camaras",desc:"Empieza a grabar sola cuando detecta movimiento cerca de tu auto. Full HD 1080P, incluye soporte y cargador de auto; acepta memoria de hasta 32 GB."},
+  {id:26,nombre:"Inversor de Corriente 1000W para Auto",precio:949,img:"img/inversor-1000w.webp",cat:"emergencia",desc:"Convierte la batería de tu auto en un contacto de casa: conecta laptop, herramientas y aparatos de hasta 1000W. 2 puertos USB y protección contra sobrecarga y cortocircuito."},
+  {id:27,nombre:"Inversor Automotriz 300W de 12V a 110V",precio:659,img:"img/inversor-300w.webp",cat:"emergencia",desc:"Energía de casa en tu auto para laptop, cargadores y aparatos de hasta 300W. Compacto, con puerto USB y protecciones de seguridad."},
+  {id:28,nombre:"Inversor con Cargador UPS Volta 500W",precio:649,img:"img/inversor-500w.webp",cat:"emergencia",desc:"Inversor 500W de 12V a 110V con función UPS: mantiene tus aparatos encendidos y carga la batería. Puertos USB y contactos para usar varios equipos a la vez."},
+  {id:29,nombre:"Llave de Impacto Inalámbrica 20V MAX con Luz Frontal",precio:1349,img:"img/llave-impacto.webp",cat:"emergencia",desc:"Quita y pone tuercas de llanta en segundos, sin esfuerzo y sin cables. Batería de litio 20V MAX, luz frontal para trabajar de noche e incluye dado y accesorios."},
+  {id:30,nombre:"Llave de Impacto Inalámbrica de 1/2″ 20V MAX",precio:1429,img:"img/llave-impacto-media.webp",cat:"emergencia",desc:"Cuadro de 1/2 pulgada para dados estándar, gatillo de velocidad variable y selector para apretar o aflojar. La herramienta que te salva en un cambio de llanta en carretera."},
+  {id:31,nombre:"Aspiradora de Emergencia 6 en 1 para Auto",precio:259,img:"img/aspiradora-emergencia.webp",cat:"emergencia",desc:"Aspira y sopla, y además trae cortador de cinturón y rompevidrios de emergencia. Inalámbrica, compacta para la guantera y con 5 accesorios de limpieza."},
+  {id:32,nombre:"Inflallantas en Aerosol 320 ml para Autos Compactos",precio:259,img:"img/inflallantas.webp",cat:"emergencia",desc:"Ponchadura resuelta en minutos sin gato ni refacción: agita, conecta a la válvula y sigue tu camino. Tamaño compacto para traerlo siempre en la cajuela."},
+  {id:33,nombre:"Adaptador Inalámbrico CarPlay y Android Auto 4 en 1",precio:769,img:"img/adaptador-carplay.webp",cat:"audio",desc:"Convierte el CarPlay de tu auto en inalámbrico: también Android Auto, AirPlay y Miracast en un solo adaptador USB. Mapas, música y llamadas en tu pantalla, sin cables."},
+  {id:34,nombre:"Autoestéreo 7″ Doble DIN con CarPlay y Android Auto Inalámbrico",precio:1149,img:"img/autoestereo-doble-din.webp",cat:"audio",desc:"Pantalla IPS HD táctil de 7 pulgadas con CarPlay y Android Auto sin cables, Bluetooth 5.0, radio FM y entrada para cámara de reversa. Moderniza cualquier tablero doble DIN."},
+  {id:35,nombre:"Transmisor Bluetooth 5.0 para Auto con 2 USB y Micro SD",precio:269,img:"img/transmisor-bt.webp",cat:"audio",desc:"Música de tu celular en el estéreo de cualquier auto por FM, con Bluetooth 5.0. Dos puertos USB para cargar y ranura Micro SD para tu música."},
+  {id:36,nombre:"Par de Intercomunicadores Bluetooth para Casco de Moto",precio:1079,img:"img/intercomunicador-casco.webp",cat:"audio",desc:"Habla con tu acompañante u otro motociclista hasta 300 m, con hasta 30 horas de batería y resistencia al agua IP67. Incluye dos tipos de micrófono para casco cerrado o abierto."},
+  {id:37,nombre:"Auricular Bluetooth para Casco de Moto con Luz RGB",precio:519,img:"img/auricular-casco.webp",cat:"audio",desc:"Música y llamadas manos libres dentro de tu casco con Bluetooth 5.1 y reducción de ruido. Botones grandes fáciles de usar con guantes y aro luminoso RGB."},
+  {id:38,nombre:"Auriculares Bluetooth 5.3 para Casco de Motocicleta",precio:329,img:"img/auriculares-casco.webp",cat:"audio",desc:"Sonido estéreo y micrófono para llamadas sin quitarte el casco. Planos y cómodos, se instalan dentro del casco en minutos."},
+  {id:39,nombre:"Multicargador para Auto QC3.0 y PD 20W — 4 en 1",precio:229,img:"img/multicargador.webp",cat:"audio",desc:"Carga hasta 4 dispositivos a la vez con carga rápida QC3.0 y PD 20W por USB-C. Ideal para viajes familiares o para repartidores y conductores de aplicación."},
+  {id:40,nombre:"Cable Cargador Magnético 65W de Carga Rápida para Auto",precio:259,img:"img/cable-magnetico.webp",cat:"audio",desc:"Cable trenzado que se recoge solo con imanes: nada de cables enredados en la consola. Carga rápida de 65W con chip inteligente que protege la batería de tu celular."},
+  {id:41,nombre:"Soporte para Celular con Carga Inalámbrica 10W y Sujeción Automática",precio:289,img:"img/soporte-inalambrico-10w.webp",cat:"audio",desc:"Acerca tu celular y el soporte lo abraza solo, cargándolo sin cables. Sujeción automática con sensor y liberación con un toque."},
+  {id:42,nombre:"Soporte para Celular con Succión Extra Fuerte y Brazo Articulado",precio:249,img:"img/soporte-succion.webp",cat:"audio",desc:"Base de succión con adhesivo estabilizado que no se cae ni en caminos feos. Brazo articulado multiángulo para dejar el celular justo donde lo necesitas."},
+  {id:43,nombre:"Soporte para Celular 980° con Ventosa y Bloqueo Automático",precio:229,img:"img/soporte-ventosa.webp",cat:"audio",desc:"Giro total de 980° y ventosa ultra fuerte que resiste hasta 80 °C. Bloqueo automático al colocar el celular y liberación en un segundo."},
+  {id:44,nombre:"Soporte Antideslizante para Celular en Moto o Bici",precio:199,img:"img/soporte-moto.webp",cat:"audio",desc:"Agarre reforzado para pantallas de 4.5 a 6.8 pulgadas: tu celular firme en la moto o la bici, sin vibraciones ni sustos."},
+  {id:45,nombre:"Tiras LED RGB para Interior de Auto — 48 LED con Control y App",precio:259,img:"img/tiras-rgb-interior.webp",cat:"iluminacion",desc:"Kit de 4 tiras con 48 LED RGB para pies y tablero: cambia colores y efectos con el control remoto o desde la app. Se conecta al encendedor y se instala en 5 minutos."},
+  {id:46,nombre:"Hidrolavadora Inalámbrica 24V para Auto con Batería de Litio",precio:749,img:"img/hidrolavadora.webp",cat:"exterior",desc:"Lava tu auto donde sea, sin manguera ni contacto: succiona el agua de una cubeta. 35 bar de presión, batería de 20–30 minutos, boquillas intercambiables y lata de espuma incluida."},
+  {id:47,nombre:"Aspiradora y Soplador Inalámbrico 2 en 1 para Auto",precio:359,img:"img/aspiradora-soplador.webp",cat:"exterior",desc:"Aspira el interior y sopla el polvo de los rincones imposibles con un solo equipo. Batería de 4000 mAh para 40 minutos, con boquillas de succión, soplado e inflado."},
+  {id:48,nombre:"Carro Plegable para Mover tu Motocicleta — hasta 500 kg",precio:289,img:"img/carro-moto.webp",cat:"exterior",desc:"Mueve tu moto en espacios apretados sin esfuerzo: ruedas multidireccionales y estructura de acero plegable. Ideal para cocheras y talleres pequeños."},
+  {id:49,nombre:"Organizadores de Asiento para Auto — Par, Color Café",precio:209,img:"img/organizador-asiento.webp",cat:"exterior",desc:"Rellena el hueco entre el asiento y la consola: ya no se caen el celular, las llaves ni las monedas. Cuero PU elegante con compartimentos y espacio para el cinturón."},
+  {id:50,nombre:"Limpiador de Frenos para Automóviles 525 ml",precio:269,img:"img/limpiador-frenos.webp",cat:"exterior",desc:"Quita polvo de freno, grasa y suciedad de discos y calipers en segundos. Acción rápida, se evapora sin dejar residuos y deja tus frenos trabajando al 100."}
 ];
 
 const NUM_WA = "525655829704";
@@ -356,41 +358,76 @@ const sinResultados = document.getElementById("sinResultados");
 const buscador = document.getElementById("buscador");
 let catActiva = "todos";
 
-function formato(n){ return "$" + n.toLocaleString("es-MX"); }
+function formato(n){
+  return "$" + n.toLocaleString("es-MX");
+}
 
 function render(){
   const q = buscador.value.trim().toLowerCase();
   grid.innerHTML = "";
   let visibles = 0;
+
   PRODUCTOS.forEach(p => {
-    const pasaCat = (catActiva === "todos" || p.cat === catActiva);
-    const pasaTexto = (!q || p.nombre.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+    const pasaCat = catActiva === "todos" || p.cat === catActiva;
+    const pasaTexto = !q || p.nombre.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q);
+
     if(!pasaCat || !pasaTexto) return;
+
     visibles++;
+
     const card = document.createElement("article");
     card.className = "card";
-    card.innerHTML =
-      '<img src="' + p.img + '" alt="' + p.nombre + '" loading="lazy">' +
-      '<div class="card-body">' +
-        '<h3>' + p.nombre + '</h3>' +
-        '<p class="desc">' + p.desc + '</p>' +
-        '<span class="etiqueta-envio">🚚 ENVÍO INCLUIDO</span>' +
-        '<div class="precio">' + formato(p.precio) + ' <small>MXN · envío incluido</small></div>' +
-        '<button class="btn-comprar" data-id="' + p.id + '">🛒 Comprar</button>' +
-      '</div>';
+
+    const imagen = document.createElement("img");
+    imagen.src = p.img;
+    imagen.alt = p.nombre;
+    imagen.loading = "lazy";
+
+    const body = document.createElement("div");
+    body.className = "card-body";
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = p.nombre;
+
+    const descripcion = document.createElement("p");
+    descripcion.className = "desc";
+    descripcion.textContent = p.desc;
+
+    const envio = document.createElement("span");
+    envio.className = "etiqueta-envio";
+    envio.textContent = "🚚 ENVÍO INCLUIDO";
+
+    const precio = document.createElement("div");
+    precio.className = "precio";
+    precio.textContent = formato(p.precio) + " ";
+
+    const notaPrecio = document.createElement("small");
+    notaPrecio.textContent = "MXN · envío incluido";
+    precio.appendChild(notaPrecio);
+
+    const boton = document.createElement("button");
+    boton.className = "btn-comprar";
+    boton.textContent = "🛒 Comprar";
+    boton.dataset.id = p.id;
+    boton.addEventListener("click", () => abrirCheckout(p.id));
+
+    body.append(titulo, descripcion, envio, precio, boton);
+    card.append(imagen, body);
     grid.appendChild(card);
   });
+
   sinResultados.style.display = visibles ? "none" : "block";
-  grid.querySelectorAll(".btn-comprar").forEach(b => b.addEventListener("click", () => abrirCheckout(parseInt(b.dataset.id))));
 }
 
 document.getElementById("filtros").addEventListener("click", e => {
   if(e.target.tagName !== "BUTTON") return;
+
   document.querySelectorAll(".filtro").forEach(f => f.classList.remove("activo"));
   e.target.classList.add("activo");
   catActiva = e.target.dataset.cat;
   render();
 });
+
 buscador.addEventListener("input", render);
 
 /* ===== CHECKOUT ===== */
@@ -400,30 +437,56 @@ const pasoPago = document.getElementById("pasoPago");
 let productoActual = null;
 
 function actualizarTotal(){
-  const cant = Math.max(1, parseInt(document.getElementById("fCantidad").value) || 1);
+  if(!productoActual) return {cant:1,total:0};
+
+  const entradaCantidad = document.getElementById("fCantidad");
+  let cant = parseInt(entradaCantidad.value, 10) || 1;
+  cant = Math.min(20, Math.max(1, cant));
+  entradaCantidad.value = cant;
+
   const total = productoActual.precio * cant;
+
   document.getElementById("totalForm").textContent = formato(total);
   document.getElementById("totalPago").textContent = formato(total);
-  return {cant, total};
+
+  return {cant,total};
 }
 
 function abrirCheckout(id){
   productoActual = PRODUCTOS.find(p => p.id === id);
+  if(!productoActual) return;
+
   document.getElementById("resumenNombre").textContent = productoActual.nombre;
   document.getElementById("resumenPrecio").textContent = formato(productoActual.precio);
+  document.getElementById("fCantidad").value = 1;
+
   form.classList.remove("paso-oculto");
   pasoPago.classList.add("paso-oculto");
+
   actualizarTotal();
   modalFondo.classList.add("abierto");
   document.body.style.overflow = "hidden";
 }
+
 function cerrarCheckout(){
   modalFondo.classList.remove("abierto");
   document.body.style.overflow = "";
 }
+
 document.getElementById("btnCerrar").addEventListener("click", cerrarCheckout);
-modalFondo.addEventListener("click", e => { if(e.target === modalFondo) cerrarCheckout(); });
+
+modalFondo.addEventListener("click", e => {
+  if(e.target === modalFondo) cerrarCheckout();
+});
+
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape" && modalFondo.classList.contains("abierto")){
+    cerrarCheckout();
+  }
+});
+
 document.getElementById("fCantidad").addEventListener("input", actualizarTotal);
+
 document.getElementById("btnVolver").addEventListener("click", e => {
   e.preventDefault();
   pasoPago.classList.add("paso-oculto");
@@ -439,20 +502,30 @@ function campoValido(id, errId, test){
 
 form.addEventListener("submit", e => {
   e.preventDefault();
+
   let ok = true;
-  ok = campoValido("fNombre","eNombre", v => v.length >= 5) && ok;
-  ok = campoValido("fTelefono","eTelefono", v => v.replace(/\D/g,"").length >= 10) && ok;
-  ok = campoValido("fCalle","eCalle", v => v.length >= 3) && ok;
-  ok = campoValido("fNumero","eNumero", v => v.length >= 1) && ok;
-  ok = campoValido("fColonia","eColonia", v => v.length >= 3) && ok;
-  ok = campoValido("fCiudad","eCiudad", v => v.length >= 3) && ok;
-  ok = campoValido("fEstado","eEstado", v => v.length >= 2) && ok;
-  ok = campoValido("fCP","eCP", v => /^\d{5}$/.test(v)) && ok;
+
+  ok = campoValido("fNombre","eNombre",v => v.length >= 5) && ok;
+  ok = campoValido("fTelefono","eTelefono",v => v.replace(/\D/g,"").length >= 10) && ok;
+  ok = campoValido("fCalle","eCalle",v => v.length >= 3) && ok;
+  ok = campoValido("fNumero","eNumero",v => v.length >= 1) && ok;
+  ok = campoValido("fColonia","eColonia",v => v.length >= 3) && ok;
+  ok = campoValido("fCiudad","eCiudad",v => v.length >= 3) && ok;
+  ok = campoValido("fEstado","eEstado",v => v.length >= 2) && ok;
+  ok = campoValido("fCP","eCP",v => /^\d{5}$/.test(v)) && ok;
+
   if(!ok) return;
 
-  const {cant, total} = actualizarTotal();
+  const {cant,total} = actualizarTotal();
   const g = id => document.getElementById(id).value.trim();
-  const direccion = g("fCalle") + " " + g("fNumero") + ", Col. " + g("fColonia") + ", " + g("fCiudad") + ", " + g("fEstado") + ", C.P. " + g("fCP");
+
+  const direccion =
+    g("fCalle") + " " + g("fNumero") +
+    ", Col. " + g("fColonia") +
+    ", " + g("fCiudad") +
+    ", " + g("fEstado") +
+    ", C.P. " + g("fCP");
+
   const mensaje =
     "🛒 *NUEVO PEDIDO — AutoAccesorios MX*\n" +
     "━━━━━━━━━━━━━━━\n" +
@@ -466,24 +539,49 @@ form.addEventListener("submit", e => {
     "🏠 *Dirección de entrega:*\n" + direccion + "\n" +
     "━━━━━━━━━━━━━━━\n" +
     "📸 En este mismo chat te adjunto la captura de mi depósito para confirmar mi pedido. ¡Gracias!";
-  document.getElementById("btnEnviarWA").href = "https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(mensaje);
+
+  document.getElementById("btnEnviarWA").href =
+    "https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(mensaje);
+
   form.classList.add("paso-oculto");
   pasoPago.classList.remove("paso-oculto");
   modalFondo.scrollTop = 0;
 });
 
-document.getElementById("btnCopiar").addEventListener("click", function(){
+document.getElementById("btnCopiar").addEventListener("click", async function(){
   const texto = document.getElementById("clabeNum").textContent.trim();
   const btn = this;
-  const hecho = () => { btn.textContent = "✅ ¡Copiada!"; setTimeout(() => btn.textContent = "📋 Copiar CLABE", 2200); };
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(texto).then(hecho).catch(() => { copiarManual(texto); hecho(); });
-  } else { copiarManual(texto); hecho(); }
+
+  try{
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      await navigator.clipboard.writeText(texto);
+    }else{
+      copiarManual(texto);
+    }
+
+    btn.textContent = "✅ ¡Copiada!";
+    setTimeout(() => btn.textContent = "📋 Copiar CLABE", 2200);
+  }catch(e){
+    copiarManual(texto);
+    btn.textContent = "📋 Intenta copiar manualmente";
+    setTimeout(() => btn.textContent = "📋 Copiar CLABE", 2500);
+  }
 });
+
 function copiarManual(texto){
   const ta = document.createElement("textarea");
-  ta.value = texto; document.body.appendChild(ta); ta.select();
-  try { document.execCommand("copy"); } catch(e){}
+  ta.value = texto;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+
+  try{
+    document.execCommand("copy");
+  }catch(e){
+    console.error("No fue posible copiar el texto automáticamente.");
+  }
+
   document.body.removeChild(ta);
 }
 
