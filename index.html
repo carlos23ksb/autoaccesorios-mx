@@ -131,6 +131,8 @@ footer .marca{color:#fff;}
 /* Detalle de producto y galería */
 .btn-detalle{background:#fff; color:var(--azul); border:2px solid var(--azul); border-radius:10px; padding:11px; font-size:.95rem; font-weight:700; cursor:pointer; width:100%;}
 .btn-detalle:hover{background:#eef4ff;}
+.btn-compartir{background:#eef7ee; color:#0d7a3c; border:2px solid #0d7a3c; border-radius:10px; padding:11px; font-size:.95rem; font-weight:700; cursor:pointer; width:100%; margin-top:8px;}
+.btn-compartir:hover{background:#dcf2dc;}
 .card-img{cursor:pointer;}
 .modal-detalle{max-width:560px;}
 .galeria{position:relative; overflow:hidden; border-radius:12px; background:#fff; border:1px solid var(--borde); margin-bottom:14px;}
@@ -264,6 +266,7 @@ footer .marca{color:#fff;}
     <ul class="detalle-specs" id="detalleSpecs"></ul>
     <button class="btn-principal" id="btnComprarDetalle">🛒 Comprar</button>
     <a class="btn-wa" id="btnWADetalle" href="#" target="_blank" rel="noopener" style="margin-top:10px;">💬 Preguntar por WhatsApp</a>
+    <button class="btn-compartir" id="btnCompartirDetalle">🔗 Compartir este producto</button>
   </div>
 </div>
 
@@ -460,12 +463,14 @@ function render(){
         '<div class="precio">' + formato(p.precio) + ' <small>MXN · envío incluido</small></div>' +
         '<button class="btn-comprar" data-id="' + p.id + '">🛒 Comprar</button>' +
         '<button class="btn-detalle" data-id="' + p.id + '">📷 Ver fotos y especificaciones</button>' +
+        '<button class="btn-compartir" data-id="' + p.id + '">🔗 Compartir</button>' +
       '</div>';
     grid.appendChild(card);
   });
   sinResultados.style.display = visibles ? "none" : "block";
   grid.querySelectorAll(".btn-comprar").forEach(b => b.addEventListener("click", () => abrirCheckout(parseInt(b.dataset.id))));
   grid.querySelectorAll(".btn-detalle").forEach(b => b.addEventListener("click", () => abrirDetalle(parseInt(b.dataset.id))));
+  grid.querySelectorAll(".btn-compartir").forEach(b => b.addEventListener("click", () => compartirProducto(parseInt(b.dataset.id))));
   grid.querySelectorAll("[data-detalle]").forEach(im => im.addEventListener("click", () => abrirDetalle(parseInt(im.dataset.detalle))));
 }
 
@@ -628,6 +633,26 @@ document.getElementById("btnComprarDetalle").addEventListener("click", () => {
   cerrarDetalle();
   abrirCheckout(id);
 });
+document.getElementById("btnCompartirDetalle").addEventListener("click", () => { if(detalleActual) compartirProducto(detalleActual.id); });
+
+/* ===== COMPARTIR PRODUCTO CON ENLACE DIRECTO ===== */
+function enlaceProducto(id){
+  return "https://carlos23ksb.github.io/autoaccesorios-mx/?p=" + id;
+}
+function compartirProducto(id){
+  const p = PRODUCTOS.find(x => x.id === id);
+  if(!p) return;
+  const url = enlaceProducto(id);
+  const texto = p.nombre + " — " + formato(p.precio) + " MXN, envío incluido a todo México";
+  if(navigator.share){
+    navigator.share({title: p.nombre + " | AutoAccesorios MX", text: texto, url: url}).catch(() => {});
+  } else if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(url).then(() => alert("✅ Enlace del producto copiado:\n" + url)).catch(() => { copiarManual(url); alert("✅ Enlace del producto copiado:\n" + url); });
+  } else {
+    copiarManual(url);
+    alert("✅ Enlace del producto copiado:\n" + url);
+  }
+}
 let toqueX = null;
 const galBox = document.getElementById("galeriaBox");
 galBox.addEventListener("touchstart", e => { toqueX = e.changedTouches[0].clientX; }, {passive:true});
@@ -639,6 +664,14 @@ galBox.addEventListener("touchend", e => {
 }, {passive:true});
 
 render();
+
+/* ===== ABRIR PRODUCTO DESDE ENLACE COMPARTIDO (?p=ID) ===== */
+(function(){
+  const pid = parseInt(new URLSearchParams(location.search).get("p"));
+  if(pid && PRODUCTOS.some(p => p.id === pid)){
+    setTimeout(() => abrirDetalle(pid), 80);
+  }
+})();
 </script>
 <script>
 if ("serviceWorker" in navigator) {
