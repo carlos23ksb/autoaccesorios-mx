@@ -150,6 +150,23 @@ footer .marca{color:#fff;}
 .detalle-stock{display:inline-block; background:#e7f7ee; color:#0d7a3c; font-weight:700; font-size:.9rem; padding:4px 11px; border-radius:999px; margin:8px 0 4px;}
 .detalle-desc{color:var(--gris); font-size:.95rem; margin-top:6px;}
 .detalle-sub{color:var(--azul-oscuro); font-size:1.05rem; margin:16px 0 8px;}
+.card-estrellas{color:#f5a623; font-size:1rem; margin-top:6px; letter-spacing:2px;}
+.card-estrellas small{color:#555; letter-spacing:0;}
+.resena{border-top:1px solid #e3e9f2; padding:8px 0;}
+.resena .r-estrellas{color:#f5a623; letter-spacing:2px;}
+.resena .r-nombre{font-weight:700; color:var(--azul-oscuro);}
+.resena .r-texto{color:#333; margin-top:2px;}
+.resenas-vacio{color:#555; background:#f4f7fb; border-radius:10px; padding:10px;}
+.calif-box{background:#f4f7fb; border-radius:12px; padding:12px; margin-top:12px;}
+.calif-titulo{font-weight:700; color:var(--azul-oscuro); margin-bottom:6px;}
+.estrellas-sel{display:flex; gap:6px; margin:6px 0 10px;}
+.estrellas-sel button{background:none; border:none; font-size:2rem; line-height:1; color:#c9d4e4; cursor:pointer; padding:0;}
+.estrellas-sel button.on{color:#f5a623;}
+.calif-box input,.calif-box textarea{width:100%; border:1px solid #c9d4e4; border-radius:8px; padding:9px; margin-bottom:8px; font:inherit; box-sizing:border-box;}
+.calif-nota{font-size:.8rem; color:#666; margin-top:8px;}
+.seccion-calificar{max-width:900px; margin:26px auto; padding:22px 18px; background:#fff; border-radius:16px; text-align:center; box-shadow:0 2px 10px rgba(13,42,99,.08);}
+.seccion-calificar .estrellas-sel{justify-content:center;}
+
 .detalle-specs{list-style:none; margin:0 0 6px; padding:0;}
 .detalle-specs li{padding:7px 10px 7px 30px; position:relative; background:var(--fondo); border:1px solid var(--borde); border-radius:9px; margin-bottom:6px; font-size:.93rem;}
 .detalle-specs li::before{content:"✔"; position:absolute; left:10px; top:7px; color:var(--verde); font-weight:900;}
@@ -235,6 +252,14 @@ footer .marca{color:#fff;}
   </section>
 </main>
 
+<section class="seccion-calificar">
+  <h2>⭐ Califica AutoAccesorios MX</h2>
+  <p id="pagCalifResumen">¿Ya nos compraste? Tu opinión ayuda a otros clientes a comprar con confianza.</p>
+  <div class="estrellas-sel" id="estrellasPag"><button type="button" data-v="1" aria-label="1 estrellas">★</button><button type="button" data-v="2" aria-label="2 estrellas">★</button><button type="button" data-v="3" aria-label="3 estrellas">★</button><button type="button" data-v="4" aria-label="4 estrellas">★</button><button type="button" data-v="5" aria-label="5 estrellas">★</button></div>
+  <button class="btn-principal" id="btnCalifPagina" type="button" style="max-width:340px; margin:0 auto;">⭐ Enviar calificación de la página</button>
+  <div id="pagResenasLista" style="text-align:left; max-width:640px; margin:14px auto 0;"></div>
+</section>
+
 <footer>
   <div class="footer-in">
     <div class="marca">AutoAccesorios <span>MX</span></div>
@@ -267,6 +292,17 @@ footer .marca{color:#fff;}
     <button class="btn-principal" id="btnComprarDetalle">🛒 Comprar</button>
     <a class="btn-wa" id="btnWADetalle" href="#" target="_blank" rel="noopener" style="margin-top:10px;">💬 Preguntar por WhatsApp</a>
     <button class="btn-compartir" id="btnCompartirDetalle">🔗 Compartir este producto</button>
+    <h3 class="detalle-sub">⭐ Opiniones de clientes</h3>
+    <div id="resenasResumen"></div>
+    <div id="resenasLista"></div>
+    <div class="calif-box">
+      <p class="calif-titulo">¿Ya compraste este producto? Califícalo:</p>
+      <div class="estrellas-sel" id="estrellasProd"><button type="button" data-v="1" aria-label="1 estrellas">★</button><button type="button" data-v="2" aria-label="2 estrellas">★</button><button type="button" data-v="3" aria-label="3 estrellas">★</button><button type="button" data-v="4" aria-label="4 estrellas">★</button><button type="button" data-v="5" aria-label="5 estrellas">★</button></div>
+      <input type="text" id="califNombre" placeholder="Tu nombre" maxlength="60">
+      <textarea id="califTexto" rows="2" maxlength="300" placeholder="Cuéntanos cómo te fue: entrega, calidad, atención..."></textarea>
+      <button class="btn-principal" id="btnEnviarCalif" type="button">⭐ Enviar mi calificación</button>
+      <p class="calif-nota">Tu calificación se envía por WhatsApp. En esta página solo se publican opiniones de clientes reales.</p>
+    </div>
   </div>
 </div>
 
@@ -443,6 +479,43 @@ let catActiva = "todos";
 
 function formato(n){ return "$" + n.toLocaleString("es-MX"); }
 
+/* ===== CALIFICACIONES (solo opiniones reales recibidas por WhatsApp) ===== */
+const RESENAS = {};
+const RESENAS_PAGINA = [];
+let califProdSel = 0, califPagSel = 0;
+function estrellasStr(v){ return "★★★★★".slice(0, v) + "☆☆☆☆☆".slice(0, 5 - v); }
+function promedioRes(arr){ return arr.length ? arr.reduce((a, r) => a + r.e, 0) / arr.length : 0; }
+function estrellasCard(id){
+  const arr = RESENAS[id] || [];
+  if(!arr.length) return "";
+  const pr = promedioRes(arr);
+  return '<div class="card-estrellas">' + estrellasStr(Math.round(pr)) + ' <small>' + pr.toFixed(1) + ' (' + arr.length + ')</small></div>';
+}
+function resenaHTML(r){
+  return '<div class="resena"><span class="r-estrellas">' + estrellasStr(r.e) + '</span> <span class="r-nombre">' + r.n + '</span><p class="r-texto">' + r.t + '</p></div>';
+}
+function pintarSel(cont, val){
+  if(!cont) return;
+  cont.querySelectorAll("button").forEach(b => b.classList.toggle("on", parseInt(b.dataset.v) <= val));
+}
+function cargarResenas(id){
+  const arr = RESENAS[id] || [];
+  const res = document.getElementById("resenasResumen");
+  const lis = document.getElementById("resenasLista");
+  if(arr.length){
+    const pr = promedioRes(arr);
+    res.innerHTML = '<p><span style="color:#f5a623; font-size:1.2rem; letter-spacing:2px;">' + estrellasStr(Math.round(pr)) + '</span> <strong>' + pr.toFixed(1) + ' de 5</strong> · ' + arr.length + ' opinión(es) de clientes</p>';
+    lis.innerHTML = arr.map(resenaHTML).join("");
+  } else {
+    res.innerHTML = "";
+    lis.innerHTML = '<p class="resenas-vacio">Este producto aún no tiene opiniones publicadas. Si ya lo compraste, ¡sé el primero en calificarlo!</p>';
+  }
+  califProdSel = 0;
+  pintarSel(document.getElementById("estrellasProd"), 0);
+  document.getElementById("califNombre").value = "";
+  document.getElementById("califTexto").value = "";
+}
+
 function render(){
   const q = buscador.value.trim().toLowerCase();
   grid.innerHTML = "";
@@ -461,6 +534,7 @@ function render(){
         '<p class="desc">' + p.desc + '</p>' +
         '<span class="etiqueta-envio">🚚 ENVÍO INCLUIDO</span>' +
         '<div class="precio">' + formato(p.precio) + ' <small>MXN · envío incluido</small></div>' +
+        estrellasCard(p.id) +
         '<button class="btn-comprar" data-id="' + p.id + '">🛒 Comprar</button>' +
         '<button class="btn-detalle" data-id="' + p.id + '">📷 Ver fotos y especificaciones</button>' +
         '<button class="btn-compartir" data-id="' + p.id + '">🔗 Compartir</button>' +
@@ -598,6 +672,7 @@ function abrirDetalle(id){
   document.getElementById("detalleDesc").textContent = detalleActual.desc;
   document.getElementById("detalleSpecs").innerHTML =
     (detalleActual.specs || []).map(s => '<li>' + s + '</li>').join("");
+  cargarResenas(detalleActual.id);
   const msg = "Hola, me interesa este producto de AutoAccesorios MX: *" + detalleActual.nombre +
     "* (" + formato(detalleActual.precio) + ", envío incluido). ¿Me das más información?";
   document.getElementById("btnWADetalle").href = "https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(msg);
@@ -634,6 +709,41 @@ document.getElementById("btnComprarDetalle").addEventListener("click", () => {
   abrirCheckout(id);
 });
 document.getElementById("btnCompartirDetalle").addEventListener("click", () => { if(detalleActual) compartirProducto(detalleActual.id); });
+
+/* ===== ENVIAR CALIFICACIONES POR WHATSAPP ===== */
+document.getElementById("estrellasProd").addEventListener("click", e => {
+  if(e.target.tagName !== "BUTTON") return;
+  califProdSel = parseInt(e.target.dataset.v);
+  pintarSel(document.getElementById("estrellasProd"), califProdSel);
+});
+document.getElementById("btnEnviarCalif").addEventListener("click", () => {
+  if(!detalleActual) return;
+  if(!califProdSel){ alert("Toca las estrellas para elegir tu calificación."); return; }
+  const nom = document.getElementById("califNombre").value.trim() || "Cliente";
+  const txt = document.getElementById("califTexto").value.trim();
+  const msg = "⭐ CALIFICACIÓN DE PRODUCTO\nProducto: " + detalleActual.nombre +
+    "\nNombre: " + nom + "\nCalificación: " + califProdSel + " de 5 estrellas\nComentario: " + (txt || "(sin comentario)");
+  window.open("https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(msg), "_blank");
+});
+document.getElementById("estrellasPag").addEventListener("click", e => {
+  if(e.target.tagName !== "BUTTON") return;
+  califPagSel = parseInt(e.target.dataset.v);
+  pintarSel(document.getElementById("estrellasPag"), califPagSel);
+});
+document.getElementById("btnCalifPagina").addEventListener("click", () => {
+  if(!califPagSel){ alert("Toca las estrellas para elegir tu calificación."); return; }
+  const msg = "⭐ CALIFICACIÓN DE LA PÁGINA AutoAccesorios MX: " + califPagSel + " de 5 estrellas";
+  window.open("https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(msg), "_blank");
+});
+(function(){
+  const lis = document.getElementById("pagResenasLista");
+  const res = document.getElementById("pagCalifResumen");
+  if(RESENAS_PAGINA.length){
+    const pr = promedioRes(RESENAS_PAGINA);
+    res.innerHTML = '<span style="color:#f5a623; font-size:1.3rem; letter-spacing:2px;">' + estrellasStr(Math.round(pr)) + '</span> <strong>' + pr.toFixed(1) + ' de 5</strong> · ' + RESENAS_PAGINA.length + ' opinión(es) de clientes';
+    lis.innerHTML = RESENAS_PAGINA.map(resenaHTML).join("");
+  }
+})();
 
 /* ===== COMPARTIR PRODUCTO CON ENLACE DIRECTO ===== */
 function enlaceProducto(id){
