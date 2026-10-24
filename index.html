@@ -303,7 +303,7 @@ footer .marca{color:#fff;}
       <input type="text" id="califNombre" placeholder="Tu nombre" maxlength="60">
       <textarea id="califTexto" rows="2" maxlength="300" placeholder="Cuéntanos cómo te fue: entrega, calidad, atención..."></textarea>
       <button class="btn-principal" id="btnEnviarCalif" type="button">⭐ Enviar mi calificación</button>
-      <p class="calif-nota">Tu calificación se envía por WhatsApp. En esta página solo se publican opiniones de clientes reales.</p>
+      <p class="calif-nota">Tu calificación se publica al instante en esta página, visible para todos los clientes.</p>
     </div>
   </div>
 </div>
@@ -481,9 +481,10 @@ let catActiva = "todos";
 
 function formato(n){ return "$" + n.toLocaleString("es-MX"); }
 
-/* ===== CALIFICACIONES (solo opiniones reales recibidas por WhatsApp) ===== */
+/* ===== CALIFICACIONES EN VIVO (Firebase Realtime Database) ===== */
+const FB_DB = "https://autoaccesorios-mx-default-rtdb.firebaseio.com";
 const RESENAS = {};
-const RESENAS_PAGINA = [];
+let RESENAS_PAGINA = [];
 let califProdSel = 0, califPagSel = 0;
 function estrellasStr(v){ return "★★★★★".slice(0, v) + "☆☆☆☆☆".slice(0, 5 - v); }
 function promedioRes(arr){ return arr.length ? arr.reduce((a, r) => a + r.e, 0) / arr.length : 0; }
@@ -493,8 +494,10 @@ function estrellasCard(id){
   const pr = promedioRes(arr);
   return '<div class="card-estrellas">' + estrellasStr(Math.round(pr)) + ' <small>' + pr.toFixed(1) + ' (' + arr.length + ')</small></div>';
 }
+function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 function resenaHTML(r){
-  return '<div class="resena"><span class="r-estrellas">' + estrellasStr(r.e) + '</span> <span class="r-nombre">' + r.n + '</span><p class="r-texto">' + r.t + '</p></div>';
+  const e = Math.max(0, Math.min(5, parseInt(r.e) || 0));
+  return '<div class="resena"><span class="r-estrellas">' + estrellasStr(e) + '</span> <span class="r-nombre">' + esc(r.n) + '</span><p class="r-texto">' + esc(r.t) + '</p></div>';
 }
 function pintarSel(cont, val){
   if(!cont) return;
@@ -516,6 +519,27 @@ function cargarResenas(id){
   pintarSel(document.getElementById("estrellasProd"), 0);
   document.getElementById("califNombre").value = "";
   document.getElementById("califTexto").value = "";
+}
+function fbAplicar(dataProd, dataPag){
+  if(dataProd){
+    Object.keys(RESENAS).forEach(k => delete RESENAS[k]);
+    Object.keys(dataProd).forEach(function(pid){
+      const items = dataProd[pid] ? Object.values(dataProd[pid]) : [];
+      RESENAS[pid] = items.filter(r => r && typeof r.e === "number").sort((a, b) => (b.f || 0) - (a.f || 0));
+    });
+  }
+  if(dataPag){
+    RESENAS_PAGINA = Object.values(dataPag).filter(r => r && typeof r.e === "number").sort((a, b) => (b.f || 0) - (a.f || 0));
+  }
+  render();
+  pintarPaginaRes();
+  if(detalleActual) cargarResenas(detalleActual.id);
+}
+function fbCargar(){
+  Promise.all([
+    fetch(FB_DB + "/calificaciones.json").then(r => r.json()).catch(() => null),
+    fetch(FB_DB + "/pagina.json").then(r => r.json()).catch(() => null)
+  ]).then(function(res){ fbAplicar(res[0], res[1]); }).catch(function(){});
 }
 
 function render(){
@@ -712,7 +736,7 @@ document.getElementById("btnComprarDetalle").addEventListener("click", () => {
 });
 document.getElementById("btnCompartirDetalle").addEventListener("click", () => { if(detalleActual) compartirProducto(detalleActual.id); });
 
-/* ===== ENVIAR CALIFICACIONES POR WHATSAPP ===== */
+/* ===== PUBLICAR CALIFICACIONES EN LA PAGINA (Firebase) ===== */
 document.getElementById("estrellasProd").addEventListener("click", e => {
   if(e.target.tagName !== "BUTTON") return;
   califProdSel = parseInt(e.target.dataset.v);
@@ -721,11 +745,14 @@ document.getElementById("estrellasProd").addEventListener("click", e => {
 document.getElementById("btnEnviarCalif").addEventListener("click", () => {
   if(!detalleActual) return;
   if(!califProdSel){ alert("Toca las estrellas para elegir tu calificación."); return; }
-  const nom = document.getElementById("califNombre").value.trim() || "Cliente";
-  const txt = document.getElementById("califTexto").value.trim();
-  const msg = "⭐ CALIFICACIÓN DE PRODUCTO\nProducto: " + detalleActual.nombre +
-    "\nNombre: " + nom + "\nCalificación: " + califProdSel + " de 5 estrellas\nComentario: " + (txt || "(sin comentario)");
-  window.open("https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(msg), "_blank");
+  const nom = document.getElementById("califNombre").value.trim().slice(0, 60) || "Cliente";
+  const txt = document.getElementById("califTexto").value.trim().slice(0, 400);
+  const btn = document.getElementById("btnEnviarCalif");
+  btn.disabled = true; btn.textContent = "Publicando...";
+  fetch(FB_DB + "/calificaciones/" + detalleActual.id + ".json", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({n: nom, e: califProdSel, t: txt, f: Date.now()}) })
+    .then(function(r){ if(!r.ok) throw new Error("fb"); return r.json(); })
+    .then(function(){ btn.disabled = false; btn.textContent = "✅ ¡Gracias! Tu calificación ya quedó publicada"; fbCargar(); })
+    .catch(function(){ btn.disabled = false; btn.textContent = "⭐ Enviar mi calificación"; alert("No se pudo publicar tu calificación. Revisa tu conexión e inténtalo de nuevo."); });
 });
 document.getElementById("estrellasPag").addEventListener("click", e => {
   if(e.target.tagName !== "BUTTON") return;
@@ -734,18 +761,27 @@ document.getElementById("estrellasPag").addEventListener("click", e => {
 });
 document.getElementById("btnCalifPagina").addEventListener("click", () => {
   if(!califPagSel){ alert("Toca las estrellas para elegir tu calificación."); return; }
-  const msg = "⭐ CALIFICACIÓN DE LA PÁGINA AutoAccesorios MX: " + califPagSel + " de 5 estrellas";
-  window.open("https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(msg), "_blank");
+  const btn = document.getElementById("btnCalifPagina");
+  btn.disabled = true; btn.textContent = "Publicando...";
+  fetch(FB_DB + "/pagina.json", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({n: "Cliente", e: califPagSel, t: "", f: Date.now()}) })
+    .then(function(r){ if(!r.ok) throw new Error("fb"); return r.json(); })
+    .then(function(){ btn.disabled = false; btn.textContent = "✅ ¡Gracias! Tu calificación ya quedó publicada"; fbCargar(); })
+    .catch(function(){ btn.disabled = false; btn.textContent = "⭐ Enviar calificación de la página"; alert("No se pudo publicar tu calificación. Revisa tu conexión e inténtalo de nuevo."); });
 });
-(function(){
+function pintarPaginaRes(){
   const lis = document.getElementById("pagResenasLista");
   const res = document.getElementById("pagCalifResumen");
+  if(!lis || !res) return;
   if(RESENAS_PAGINA.length){
     const pr = promedioRes(RESENAS_PAGINA);
     res.innerHTML = '<span style="color:#f5a623; font-size:1.3rem; letter-spacing:2px;">' + estrellasStr(Math.round(pr)) + '</span> <strong>' + pr.toFixed(1) + ' de 5</strong> · ' + RESENAS_PAGINA.length + ' opinión(es) de clientes';
     lis.innerHTML = RESENAS_PAGINA.map(resenaHTML).join("");
+  } else {
+    lis.innerHTML = "";
   }
-})();
+}
+pintarPaginaRes();
+fbCargar();
 
 /* ===== COMPARTIR PRODUCTO CON ENLACE DIRECTO ===== */
 function enlaceProducto(id){
