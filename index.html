@@ -173,6 +173,25 @@ footer .marca{color:#fff;}
 .detalle-specs li{padding:7px 10px 7px 30px; position:relative; background:var(--fondo); border:1px solid var(--borde); border-radius:9px; margin-bottom:6px; font-size:.93rem;}
 .detalle-specs li::before{content:"✔"; position:absolute; left:10px; top:7px; color:var(--verde); font-weight:900;}
 @media (max-width:560px){ .galeria-track img{height:280px;} }
+
+/* Carrito multi-producto */
+.header-carrito{margin-left:10px; background:var(--azul); color:#fff; font-weight:800; padding:9px 14px; border-radius:999px; font-size:.9rem; border:none; cursor:pointer; display:inline-flex; align-items:center; gap:6px; white-space:nowrap;}
+.header-carrito:hover{filter:brightness(1.12);}
+.carrito-num{background:#fff; color:var(--azul); font-weight:900; border-radius:999px; padding:1px 8px; font-size:.85rem;}
+.btn-agregar{background:#fff; color:var(--naranja-oscuro); border:2px solid var(--naranja); border-radius:10px; padding:11px; font-size:.95rem; font-weight:800; cursor:pointer; width:100%; margin-top:8px;}
+.btn-agregar:hover{background:#fff3e8;}
+.carrito-item{display:flex; gap:10px; align-items:center; border:1px solid var(--borde); border-radius:10px; padding:10px; margin-bottom:10px; background:var(--fondo);}
+.carrito-item img{width:64px; height:64px; object-fit:contain; border-radius:8px; background:#fff; flex:0 0 64px;}
+.carrito-item .ci-nombre{font-weight:700; color:var(--azul-oscuro); font-size:.92rem;}
+.carrito-item .ci-precio{color:var(--gris); font-size:.85rem;}
+.carrito-item .ci-sub{font-weight:800; color:var(--naranja-oscuro); font-size:.95rem; white-space:nowrap;}
+.cant-ctrl{display:inline-flex; align-items:center; gap:6px; margin-top:4px;}
+.cant-ctrl button{width:28px; height:28px; border-radius:50%; border:1px solid var(--borde); background:#fff; font-weight:900; cursor:pointer; font-size:1rem; line-height:1;}
+.cant-ctrl span{font-weight:800; min-width:20px; text-align:center;}
+.ci-quitar{background:none; border:none; color:#c0392b; font-size:1.15rem; cursor:pointer; padding:4px; line-height:1;}
+.carrito-vacio{text-align:center; color:var(--gris); padding:20px 10px;}
+.btn-seguir{background:#fff; color:var(--azul); border:2px solid var(--azul); border-radius:10px; padding:13px; font-size:1rem; font-weight:700; cursor:pointer; width:100%; margin-top:8px;}
+@media (max-width:560px){ .header-carrito{font-size:.8rem; padding:8px 11px;} }
 </style>
 </head>
 <body>
@@ -182,6 +201,7 @@ footer .marca{color:#fff;}
     <img class="logo" src="img/logo.webp" alt="Logo de AutoAccesorios MX">
     <div class="marca">AutoAccesorios <span>MX</span></div>
     <a class="header-wa" href="https://wa.me/525655829704?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20un%20producto%20de%20AutoAccesorios%20MX" target="_blank" rel="noopener">💬 WhatsApp</a>
+    <button class="header-carrito" id="btnCarrito" type="button" aria-label="Ver carrito">🛒 Carrito <span class="carrito-num" id="cartCount">0</span></button>
   </div>
 </header>
 
@@ -292,6 +312,7 @@ footer .marca{color:#fff;}
     <h3 class="detalle-sub">📋 Especificaciones</h3>
     <ul class="detalle-specs" id="detalleSpecs"></ul>
     <button class="btn-principal" id="btnComprarDetalle">🛒 Comprar</button>
+    <button class="btn-agregar" id="btnAgregarDetalle" type="button">➕ Agregar al carrito</button>
     <a class="btn-wa" id="btnWADetalle" href="#" target="_blank" rel="noopener" style="margin-top:10px;">💬 Preguntar por WhatsApp</a>
     <button class="btn-compartir" id="btnCompartirDetalle">🔗 Compartir este producto</button>
     <h3 class="detalle-sub">⭐ Opiniones de clientes</h3>
@@ -308,6 +329,20 @@ footer .marca{color:#fff;}
   </div>
 </div>
 
+<!-- ===== MODAL DEL CARRITO ===== -->
+<div class="modal-fondo" id="carritoFondo" role="dialog" aria-modal="true" aria-labelledby="carritoTitulo">
+  <div class="modal">
+    <button class="cerrar" id="btnCerrarCarrito" aria-label="Cerrar">×</button>
+    <h2 id="carritoTitulo">🛒 Tu carrito</h2>
+    <p style="color:var(--gris); font-size:.93rem;">Agrega varios productos y haz un solo pedido con tu mini factura.</p>
+    <div id="carritoItems" style="margin-top:14px;"></div>
+    <p class="total-final" id="carritoTotalBox">Total: <span id="carritoTotal">$0</span> <small style="color:#0d7a3c;">(envío incluido)</small></p>
+    <button class="btn-principal" id="btnPedirCarrito" type="button">📝 Hacer pedido con estos productos</button>
+    <button class="btn-seguir" id="btnSeguirComprando" type="button">← Seguir comprando</button>
+    <p style="text-align:center; margin-top:10px;"><a href="#" id="btnVaciarCarrito" style="color:#c0392b; font-weight:600;">🗑 Vaciar carrito</a></p>
+  </div>
+</div>
+
 <!-- ===== MODAL DE COMPRA ===== -->
 <div class="modal-fondo" id="modalFondo" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
   <div class="modal">
@@ -316,12 +351,12 @@ footer .marca{color:#fff;}
 
     <!-- PASO 1: FORMULARIO -->
     <form id="formPedido" novalidate>
-      <div class="resumen-prod">
+      <div class="resumen-prod" id="resumenBox">
         <strong id="resumenNombre"></strong><br>
         Precio unitario: <strong id="resumenPrecio"></strong> <span style="color:#0d7a3c; font-weight:700;">(envío incluido)</span>
       </div>
       <div class="dos-col">
-        <div class="campo">
+        <div class="campo" id="campoCantidad">
           <label for="fCantidad">Cantidad</label>
           <input type="number" id="fCantidad" min="1" max="20" value="1" required>
         </div>
@@ -562,6 +597,7 @@ function render(){
         '<div class="precio">' + formato(p.precio) + ' <small>MXN · envío incluido</small></div>' +
         estrellasCard(p.id) +
         '<button class="btn-comprar" data-id="' + p.id + '">🛒 Comprar</button>' +
+        '<button class="btn-agregar" data-id="' + p.id + '">➕ Agregar al carrito</button>' +
         '<button class="btn-detalle" data-id="' + p.id + '">📷 Ver fotos y especificaciones</button>' +
         '<button class="btn-compartir" data-id="' + p.id + '">🔗 Compartir</button>' +
       '</div>';
@@ -569,6 +605,7 @@ function render(){
   });
   sinResultados.style.display = visibles ? "none" : "block";
   grid.querySelectorAll(".btn-comprar").forEach(b => b.addEventListener("click", () => abrirCheckout(parseInt(b.dataset.id))));
+  grid.querySelectorAll(".btn-agregar").forEach(b => b.addEventListener("click", () => agregarCarrito(parseInt(b.dataset.id), b)));
   grid.querySelectorAll(".btn-detalle").forEach(b => b.addEventListener("click", () => abrirDetalle(parseInt(b.dataset.id))));
   grid.querySelectorAll(".btn-compartir").forEach(b => b.addEventListener("click", () => compartirProducto(parseInt(b.dataset.id))));
   grid.querySelectorAll("[data-detalle]").forEach(im => im.addEventListener("click", () => abrirDetalle(parseInt(im.dataset.detalle))));
@@ -583,13 +620,122 @@ document.getElementById("filtros").addEventListener("click", e => {
 });
 buscador.addEventListener("input", render);
 
+/* ===== CARRITO MULTI-PRODUCTO ===== */
+const carritoFondo = document.getElementById("carritoFondo");
+let carrito = [];
+try { carrito = JSON.parse(localStorage.getItem("aamx_carrito") || "[]"); } catch(e){ carrito = []; }
+if(!Array.isArray(carrito)) carrito = [];
+function guardarCarrito(){
+  try { localStorage.setItem("aamx_carrito", JSON.stringify(carrito)); } catch(e){}
+}
+function prodPorId(id){ return PRODUCTOS.find(p => p.id === id); }
+function cartCantTotal(){ return carrito.reduce((a, i) => a + i.cant, 0); }
+function cartTotal(){
+  return carrito.reduce((a, i) => {
+    const p = prodPorId(i.id);
+    return p ? a + p.precio * i.cant : a;
+  }, 0);
+}
+function actualizarBadge(){
+  document.getElementById("cartCount").textContent = cartCantTotal();
+}
+function agregarCarrito(id, btn){
+  const item = carrito.find(i => i.id === id);
+  if(item){ item.cant = Math.min(20, item.cant + 1); }
+  else { carrito.push({id: id, cant: 1}); }
+  guardarCarrito();
+  actualizarBadge();
+  if(btn){
+    const orig = btn.textContent;
+    btn.textContent = "✅ Agregado al carrito";
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+  }
+}
+function renderCarrito(){
+  const box = document.getElementById("carritoItems");
+  if(!carrito.length){
+    box.innerHTML = '<p class="carrito-vacio">Tu carrito está vacío.<br>Toca “➕ Agregar al carrito” en cualquier producto.</p>';
+    document.getElementById("carritoTotalBox").style.display = "none";
+    document.getElementById("btnPedirCarrito").style.display = "none";
+    return;
+  }
+  document.getElementById("carritoTotalBox").style.display = "block";
+  document.getElementById("btnPedirCarrito").style.display = "block";
+  box.innerHTML = carrito.map(i => {
+    const p = prodPorId(i.id);
+    if(!p) return "";
+    return '<div class="carrito-item">' +
+      '<img src="' + p.img + '" alt="' + esc(p.nombre) + '">' +
+      '<div style="flex:1; min-width:0;">' +
+        '<div class="ci-nombre">' + esc(p.nombre) + '</div>' +
+        '<div class="ci-precio">' + formato(p.precio) + ' c/u · envío incluido</div>' +
+        '<div class="cant-ctrl">' +
+          '<button type="button" data-menos="' + p.id + '" aria-label="Quitar uno">−</button>' +
+          '<span>' + i.cant + '</span>' +
+          '<button type="button" data-mas="' + p.id + '" aria-label="Agregar uno">+</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ci-sub">' + formato(p.precio * i.cant) + '</div>' +
+      '<button class="ci-quitar" type="button" data-quitar="' + p.id + '" aria-label="Quitar del carrito">✕</button>' +
+    '</div>';
+  }).join("");
+  document.getElementById("carritoTotal").textContent = formato(cartTotal());
+  box.querySelectorAll("[data-mas]").forEach(b => b.addEventListener("click", () => {
+    const it = carrito.find(i => i.id === parseInt(b.dataset.mas));
+    if(it){ it.cant = Math.min(20, it.cant + 1); guardarCarrito(); actualizarBadge(); renderCarrito(); }
+  }));
+  box.querySelectorAll("[data-menos]").forEach(b => b.addEventListener("click", () => {
+    const it = carrito.find(i => i.id === parseInt(b.dataset.menos));
+    if(!it) return;
+    it.cant--;
+    if(it.cant <= 0) carrito = carrito.filter(i => i.id !== it.id);
+    guardarCarrito(); actualizarBadge(); renderCarrito();
+  }));
+  box.querySelectorAll("[data-quitar]").forEach(b => b.addEventListener("click", () => {
+    carrito = carrito.filter(i => i.id !== parseInt(b.dataset.quitar));
+    guardarCarrito(); actualizarBadge(); renderCarrito();
+  }));
+}
+function abrirCarrito(){
+  renderCarrito();
+  carritoFondo.classList.add("abierto");
+  document.body.style.overflow = "hidden";
+}
+function cerrarCarrito(){
+  carritoFondo.classList.remove("abierto");
+  document.body.style.overflow = "";
+}
+document.getElementById("btnCarrito").addEventListener("click", abrirCarrito);
+document.getElementById("btnCerrarCarrito").addEventListener("click", cerrarCarrito);
+carritoFondo.addEventListener("click", e => { if(e.target === carritoFondo) cerrarCarrito(); });
+document.getElementById("btnSeguirComprando").addEventListener("click", cerrarCarrito);
+document.getElementById("btnVaciarCarrito").addEventListener("click", e => {
+  e.preventDefault();
+  carrito = [];
+  guardarCarrito(); actualizarBadge(); renderCarrito();
+});
+document.getElementById("btnPedirCarrito").addEventListener("click", () => {
+  if(!carrito.length) return;
+  cerrarCarrito();
+  abrirCheckoutCarrito();
+});
+actualizarBadge();
+
 /* ===== CHECKOUT ===== */
 const modalFondo = document.getElementById("modalFondo");
 const form = document.getElementById("formPedido");
 const pasoPago = document.getElementById("pasoPago");
 let productoActual = null;
+let modoCarrito = false;
+const resumenOriginal = document.getElementById("resumenBox").innerHTML;
 
 function actualizarTotal(){
+  if(modoCarrito){
+    const total = cartTotal();
+    document.getElementById("totalForm").textContent = formato(total);
+    document.getElementById("totalPago").textContent = formato(total);
+    return {cant: cartCantTotal(), total: total};
+  }
   const cant = Math.max(1, parseInt(document.getElementById("fCantidad").value) || 1);
   const total = productoActual.precio * cant;
   document.getElementById("totalForm").textContent = formato(total);
@@ -598,9 +744,29 @@ function actualizarTotal(){
 }
 
 function abrirCheckout(id){
+  modoCarrito = false;
   productoActual = PRODUCTOS.find(p => p.id === id);
+  document.getElementById("resumenBox").innerHTML = resumenOriginal;
+  document.getElementById("campoCantidad").style.display = "block";
   document.getElementById("resumenNombre").textContent = productoActual.nombre;
   document.getElementById("resumenPrecio").textContent = formato(productoActual.precio);
+  form.classList.remove("paso-oculto");
+  pasoPago.classList.add("paso-oculto");
+  actualizarTotal();
+  modalFondo.classList.add("abierto");
+  document.body.style.overflow = "hidden";
+}
+function abrirCheckoutCarrito(){
+  modoCarrito = true;
+  productoActual = null;
+  const lineas = carrito.map(i => {
+    const p = prodPorId(i.id);
+    return p ? "• " + p.nombre + " x" + i.cant + " — " + formato(p.precio * i.cant) : "";
+  }).filter(Boolean).join("<br>");
+  document.getElementById("resumenBox").innerHTML =
+    "<strong>🧾 Tu pedido (" + cartCantTotal() + " producto(s))</strong><br>" + lineas +
+    "<br><span style=\"color:#0d7a3c; font-weight:700;\">Precios con envío incluido</span>";
+  document.getElementById("campoCantidad").style.display = "none";
   form.classList.remove("paso-oculto");
   pasoPago.classList.add("paso-oculto");
   actualizarTotal();
@@ -643,19 +809,39 @@ form.addEventListener("submit", e => {
   const {cant, total} = actualizarTotal();
   const g = id => document.getElementById(id).value.trim();
   const direccion = g("fCalle") + " " + g("fNumero") + ", Col. " + g("fColonia") + ", " + g("fCiudad") + ", " + g("fEstado") + ", C.P. " + g("fCP");
-  const mensaje =
-    "🛒 *NUEVO PEDIDO — AutoAccesorios MX*\n" +
-    "━━━━━━━━━━━━━━━\n" +
-    "📦 *Producto:* " + productoActual.nombre + "\n" +
-    "🔢 *Cantidad:* " + cant + "\n" +
-    "💲 *Precio unitario:* " + formato(productoActual.precio) + " (envío incluido)\n" +
-    "💰 *TOTAL A PAGAR:* " + formato(total) + "\n" +
-    "━━━━━━━━━━━━━━━\n" +
-    "👤 *Nombre:* " + g("fNombre") + "\n" +
-    "📱 *Teléfono:* " + g("fTelefono") + "\n" +
-    "🏠 *Dirección de entrega:*\n" + direccion + "\n" +
-    "━━━━━━━━━━━━━━━\n" +
-    "📸 En este mismo chat te adjunto la captura de mi depósito para confirmar mi pedido. ¡Gracias!";
+  let mensaje;
+  if(modoCarrito){
+    const lineasFactura = carrito.map(i => {
+      const p = prodPorId(i.id);
+      return p ? "• " + p.nombre + " x" + i.cant + " — " + formato(p.precio * i.cant) : "";
+    }).filter(Boolean).join("\n");
+    mensaje =
+      "🛒 *NUEVO PEDIDO — AutoAccesorios MX*\n" +
+      "━━━━━━━━━━━━━━━\n" +
+      "🧾 *MINI FACTURA:*\n" + lineasFactura + "\n" +
+      "━━━━━━━━━━━━━━━\n" +
+      "💰 *TOTAL A PAGAR:* " + formato(total) + " (envío incluido)\n" +
+      "━━━━━━━━━━━━━━━\n" +
+      "👤 *Nombre:* " + g("fNombre") + "\n" +
+      "📱 *Teléfono:* " + g("fTelefono") + "\n" +
+      "🏠 *Dirección de entrega:*\n" + direccion + "\n" +
+      "━━━━━━━━━━━━━━━\n" +
+      "📸 En este mismo chat te adjunto la captura de mi depósito para confirmar mi pedido. ¡Gracias!";
+  } else {
+    mensaje =
+      "🛒 *NUEVO PEDIDO — AutoAccesorios MX*\n" +
+      "━━━━━━━━━━━━━━━\n" +
+      "📦 *Producto:* " + productoActual.nombre + "\n" +
+      "🔢 *Cantidad:* " + cant + "\n" +
+      "💲 *Precio unitario:* " + formato(productoActual.precio) + " (envío incluido)\n" +
+      "💰 *TOTAL A PAGAR:* " + formato(total) + "\n" +
+      "━━━━━━━━━━━━━━━\n" +
+      "👤 *Nombre:* " + g("fNombre") + "\n" +
+      "📱 *Teléfono:* " + g("fTelefono") + "\n" +
+      "🏠 *Dirección de entrega:*\n" + direccion + "\n" +
+      "━━━━━━━━━━━━━━━\n" +
+      "📸 En este mismo chat te adjunto la captura de mi depósito para confirmar mi pedido. ¡Gracias!";
+  }
   document.getElementById("btnEnviarWA").href = "https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(mensaje);
   form.classList.add("paso-oculto");
   pasoPago.classList.remove("paso-oculto");
@@ -733,6 +919,12 @@ document.getElementById("btnComprarDetalle").addEventListener("click", () => {
   const id = detalleActual.id;
   cerrarDetalle();
   abrirCheckout(id);
+});
+document.getElementById("btnAgregarDetalle").addEventListener("click", () => {
+  if(!detalleActual) return;
+  agregarCarrito(detalleActual.id);
+  cerrarDetalle();
+  abrirCarrito();
 });
 document.getElementById("btnCompartirDetalle").addEventListener("click", () => { if(detalleActual) compartirProducto(detalleActual.id); });
 
