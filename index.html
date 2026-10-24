@@ -152,6 +152,8 @@ footer .marca{color:#fff;}
 .detalle-sub{color:var(--azul-oscuro); font-size:1.05rem; margin:16px 0 8px;}
 .card-estrellas{color:#f5a623; font-size:1rem; margin-top:6px; letter-spacing:2px;}
 .card-estrellas small{color:#555; letter-spacing:0;}
+.card-estrellas-vacia{color:#b9c6da; font-size:1rem; margin-top:6px; letter-spacing:2px; cursor:pointer;}
+.card-estrellas-vacia small{color:#0d7a3c; font-weight:700; letter-spacing:0; font-size:.82rem;}
 .resena{border-top:1px solid #e3e9f2; padding:8px 0;}
 .resena .r-estrellas{color:#f5a623; letter-spacing:2px;}
 .resena .r-nombre{font-weight:700; color:var(--azul-oscuro);}
@@ -487,7 +489,7 @@ function estrellasStr(v){ return "★★★★★".slice(0, v) + "☆☆☆☆�
 function promedioRes(arr){ return arr.length ? arr.reduce((a, r) => a + r.e, 0) / arr.length : 0; }
 function estrellasCard(id){
   const arr = RESENAS[id] || [];
-  if(!arr.length) return "";
+  if(!arr.length) return '<div class="card-estrellas-vacia" data-detalle="' + id + '" title="Toca para calificar este producto">' + estrellasStr(0) + ' <small>\u00a1S\u00e9 el primero en calificarlo!</small></div>';
   const pr = promedioRes(arr);
   return '<div class="card-estrellas">' + estrellasStr(Math.round(pr)) + ' <small>' + pr.toFixed(1) + ' (' + arr.length + ')</small></div>';
 }
