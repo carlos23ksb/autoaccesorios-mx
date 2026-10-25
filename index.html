@@ -69,6 +69,7 @@ main{max-width:1180px; margin:0 auto; padding:22px 16px 40px;}
 .card h3{font-size:1.02rem; line-height:1.3; color:var(--azul-oscuro);}
 .card .desc{font-size:.9rem; color:var(--gris); flex:1;}
 .etiqueta-envio{align-self:flex-start; background:#e7f7ee; color:#0d7a3c; font-size:.75rem; font-weight:700; padding:3px 9px; border-radius:999px;}
+.etiqueta-cod{align-self:flex-start; background:#fff3e0; color:#9a5b00; font-size:.75rem; font-weight:700; padding:3px 9px; border-radius:999px; margin-top:4px;}
 .precio{font-size:1.5rem; font-weight:900; color:var(--naranja-oscuro);}
 .precio small{font-size:.8rem; color:var(--gris); font-weight:600;}
 .btn-comprar{background:linear-gradient(180deg,var(--naranja),var(--naranja-oscuro)); color:#fff; border:none; border-radius:10px; padding:13px; font-size:1rem; font-weight:800; cursor:pointer; width:100%;}
@@ -407,14 +408,21 @@ footer .marca{color:#fff;}
           <span class="error" id="eEstado">Escribe tu estado.</span>
         </div>
       </div>
+      <div class="campo" id="campoPago" style="display:none; background:#f7f7f7; border-radius:10px; padding:12px;">
+        <label>💳 ¿Cómo quieres pagar?</label>
+        <div style="margin-top:6px;">
+          <label style="display:block; margin-bottom:6px;"><input type="radio" name="metodoPago" value="cod" checked> 💵 Contra entrega — pagas cuando recibas tu producto</label>
+          <label style="display:block;"><input type="radio" name="metodoPago" value="prepago"> 💳 Por adelantado — transferencia o depósito OXXO</label>
+        </div>
+      </div>
       <p class="total-final">Total a pagar: <span id="totalForm">$0</span> <small style="color:#0d7a3c;">(envío incluido)</small></p>
       <button type="submit" class="btn-principal">Continuar al pago ➜</button>
     </form>
 
     <!-- PASO 2: PAGO + ENVÍO POR WHATSAPP -->
     <div id="pasoPago" class="paso-oculto">
-      <p style="color:var(--gris); font-size:.95rem;">Tu pedido está casi listo. Para confirmarlo, realiza tu pago con estos datos:</p>
-      <div class="pago-box">
+      <p id="textoPasoPago" style="color:var(--gris); font-size:.95rem;">Tu pedido está casi listo. Para confirmarlo, realiza tu pago con estos datos:</p>
+      <div class="pago-box" id="bloquePagoBanco">
         <h3>💳 Datos para pagar</h3>
         <p><strong>Banco:</strong> Spin by OXXO</p>
         <p><strong>Titular:</strong> Abigail Bustamante Serafín</p>
@@ -424,8 +432,11 @@ footer .marca{color:#fff;}
         </div>
         <p style="color:var(--gris); font-size:.88rem;">Puedes transferir desde tu app bancaria o depositar en cualquier OXXO.</p>
       </div>
-      <div class="aviso-captura">
+      <div class="aviso-captura" id="avisoCaptura">
         📸 <strong>Importante:</strong> cuando toques el botón verde, se abrirá WhatsApp con tu pedido ya escrito. <strong>Adjunta ahí mismo, en ese chat, la foto o captura de tu comprobante de depósito</strong> antes de enviar el mensaje. Así confirmamos tu compra de inmediato.
+      </div>
+      <div class="aviso-captura" id="bloquePagoCOD" style="display:none; background:#e7f7ee;">
+        💵 <strong>Tu pedido es CONTRA ENTREGA:</strong> no pagas nada ahora. Paga <strong id="totalCOD"></strong> cuando el repartidor te entregue tu producto. Solo confirma tu pedido por WhatsApp.
       </div>
       <p class="total-final">Total a pagar: <span id="totalPago">$0</span></p>
       <a class="btn-wa" id="btnEnviarWA" href="#" target="_blank" rel="noopener">✅ Enviar pedido por WhatsApp</a>
@@ -505,7 +516,8 @@ const PRODUCTOS = [
   {id:67, nombre:"Luz LED Roja Trasera para Bicicleta Impermeable — 4 Modos", precio:209, img:"img/luz-trasera-bicicleta.webp", cat:"iluminacion", desc:"Seguridad trasera para tu bici: 4 modos de iluminación, resistencia al agua IPX4 y hasta 10 horas de pila en modo intermitente.", disp:"Más de 100 disponibles", fotos:["img/galeria/luz-trasera-bicicleta-2.webp","img/galeria/luz-trasera-bicicleta-3.webp","img/galeria/luz-trasera-bicicleta-4.webp"], specs:["Luz LED roja de alta visibilidad para la parte trasera de la bicicleta","4 modos de iluminación: constante, intermitente rápido, intermitente lento y estroboscópico","Resistencia al agua IPX4","La pila dura hasta 10 horas continuas en modo intermitente","Montaje horizontal o vertical, sin herramientas","Diseño compacto y ligero"]},
   {id:68, nombre:"Impermeable de 2 Piezas para Moto con Visera Color Fosforescente", precio:429, img:"img/impermeable-moto-fosforescente.webp", cat:"exterior", desc:"Chaqueta con visera y pantalón en color fosforescente con bandas reflectivas: máxima visibilidad en lluvia y poca luz.", disp:"Más de 363 disponibles", fotos:["img/galeria/impermeable-moto-fosforescente-2.webp","img/galeria/impermeable-moto-fosforescente-3.webp","img/galeria/impermeable-moto-fosforescente-4.webp"], specs:["Impermeable de 2 piezas: chaqueta con visera y pantalón","Tela impermeable de alta resistencia","Color fosforescente y bandas reflectivas de alta visibilidad","Cierre con botones reforzados de presión","Ligero y fácil de poner, quitar y transportar","Unisex; para moto, bicicleta y actividades al aire libre bajo la lluvia"]},
   {id:69, nombre:"Juego de Destornilladores 30 en 1 con Puntas Magnéticas", precio:289, img:"img/destornilladores-30en1.webp", cat:"emergencia", desc:"30 piezas con puntas magnéticas para reparar celular, computadora y electrónicos; práctico para traerlo en el auto o la casa.", disp:"Disponibles: 17", fotos:["img/galeria/destornilladores-30en1-2.webp","img/galeria/destornilladores-30en1-3.webp","img/galeria/destornilladores-30en1-4.webp"], specs:["Set de 30 piezas para reparaciones de precisión","Puntas magnéticas: los tornillos se quedan en su lugar","Acero resistente y duradero","Para teléfonos móviles, computadoras y electrónicos","Ideal para reparaciones en casa y en el auto"]},
-  {id:70, nombre:"Esmeril Angular Inalámbrico para Discos de 125 mm", precio:1429, img:"img/esmeril-angular-125mm.webp", cat:"emergencia", desc:"Corte y desbaste sin cables: para discos de 125 mm, con empuñadura lateral, protector de disco y ventilación en el cabezal.", disp:"Más de 245 disponibles", fotos:["img/galeria/esmeril-angular-125mm-2.webp","img/galeria/esmeril-angular-125mm-3.webp","img/galeria/esmeril-angular-125mm-4.webp"], specs:["Inalámbrico: trabaja sin cable de alimentación","Para discos de 125 mm de diámetro (12.5 cm)","Empuñadura lateral para un agarre adicional","Protector alrededor del disco","Aberturas de ventilación en el cabezal","Medidas: 38 cm de largo × 10 cm de alto","Peso: 3 kg","Para corte y desbaste con el disco adecuado a cada material"]}
+  {id:70, nombre:"Esmeril Angular Inalámbrico para Discos de 125 mm", precio:1429, img:"img/esmeril-angular-125mm.webp", cat:"emergencia", desc:"Corte y desbaste sin cables: para discos de 125 mm, con empuñadura lateral, protector de disco y ventilación en el cabezal.", disp:"Más de 245 disponibles", fotos:["img/galeria/esmeril-angular-125mm-2.webp","img/galeria/esmeril-angular-125mm-3.webp","img/galeria/esmeril-angular-125mm-4.webp"], specs:["Inalámbrico: trabaja sin cable de alimentación","Para discos de 125 mm de diámetro (12.5 cm)","Empuñadura lateral para un agarre adicional","Protector alrededor del disco","Aberturas de ventilación en el cabezal","Medidas: 38 cm de largo × 10 cm de alto","Peso: 3 kg","Para corte y desbaste con el disco adecuado a cada material"]},
+  {id:71, nombre:"Bomba Inflador Aire Para Carro — Recargable con Pantalla Digital", precio:799, img:"img/inflador-cod.webp", cat:"emergencia", desc:"Infla tus llantas en minutos sin cables ni gasolinera: pantalla digital con la presión exacta y paro automático, luz LED para la noche y cable para el encendedor. Págalo contra entrega o por adelantado, como prefieras.", disp:"Disponibles: 26", fotos:["img/galeria/inflador-cod-2.webp","img/galeria/inflador-cod-3.webp","img/galeria/inflador-cod-4.webp"], specs:["Presión máxima de 150 PSI con flujo de aire de 25 L/min: infla tus llantas en minutos","Batería recargable de 7.4V con carga USB: funciona sin cables en cualquier lugar","Pantalla digital con PSI, BAR y KPA: se detiene sola al llegar a la presión fijada","Función de inflado y desinflado con accesorios para llantas, balones, bicicletas e inflables","Luz LED integrada para ver las válvulas de noche","Incluye cable para el encendedor del carro"], pagoDual:true}
 ];
 
 const NUM_WA = "525655829704";
@@ -594,10 +606,11 @@ function render(){
         '<h3>' + p.nombre + '</h3>' +
         '<p class="desc">' + p.desc + '</p>' +
         '<span class="etiqueta-envio">🚚 ENVÍO INCLUIDO</span>' +
+        (p.pagoDual ? '<span class="etiqueta-cod">💵 CONTRA ENTREGA DISPONIBLE</span>' : '') +
         '<div class="precio">' + formato(p.precio) + ' <small>MXN · envío incluido</small></div>' +
         estrellasCard(p.id) +
         '<button class="btn-comprar" data-id="' + p.id + '">🛒 Comprar</button>' +
-        '<button class="btn-agregar" data-id="' + p.id + '">➕ Agregar al carrito</button>' +
+        (p.pagoDual ? '' : '<button class="btn-agregar" data-id="' + p.id + '">➕ Agregar al carrito</button>') +
         '<button class="btn-detalle" data-id="' + p.id + '">📷 Ver fotos y especificaciones</button>' +
         '<button class="btn-compartir" data-id="' + p.id + '">🔗 Compartir</button>' +
       '</div>';
@@ -750,6 +763,7 @@ function abrirCheckout(id){
   document.getElementById("campoCantidad").style.display = "block";
   document.getElementById("resumenNombre").textContent = productoActual.nombre;
   document.getElementById("resumenPrecio").textContent = formato(productoActual.precio);
+  document.getElementById("campoPago").style.display = productoActual.pagoDual ? "block" : "none";
   form.classList.remove("paso-oculto");
   pasoPago.classList.add("paso-oculto");
   actualizarTotal();
@@ -767,6 +781,7 @@ function abrirCheckoutCarrito(){
     "<strong>🧾 Tu pedido (" + cartCantTotal() + " producto(s))</strong><br>" + lineas +
     "<br><span style=\"color:#0d7a3c; font-weight:700;\">Precios con envío incluido</span>";
   document.getElementById("campoCantidad").style.display = "none";
+  document.getElementById("campoPago").style.display = "none";
   form.classList.remove("paso-oculto");
   pasoPago.classList.add("paso-oculto");
   actualizarTotal();
@@ -807,6 +822,17 @@ form.addEventListener("submit", e => {
   if(!ok) return;
 
   const {cant, total} = actualizarTotal();
+  const metodoPago = (!modoCarrito && productoActual.pagoDual)
+    ? (document.querySelector('input[name="metodoPago"]:checked')?.value || "cod")
+    : null;
+  const esCOD = metodoPago === "cod";
+  document.getElementById("bloquePagoBanco").style.display = esCOD ? "none" : "block";
+  document.getElementById("avisoCaptura").style.display = esCOD ? "none" : "block";
+  document.getElementById("bloquePagoCOD").style.display = esCOD ? "block" : "none";
+  document.getElementById("textoPasoPago").textContent = esCOD
+    ? "Tu pedido está casi listo. Es CONTRA ENTREGA: no pagas nada ahora, pagas cuando recibas tu producto."
+    : "Tu pedido está casi listo. Para confirmarlo, realiza tu pago con estos datos:";
+  if(esCOD) document.getElementById("totalCOD").textContent = formato(total);
   const g = id => document.getElementById(id).value.trim();
   const direccion = g("fCalle") + " " + g("fNumero") + ", Col. " + g("fColonia") + ", " + g("fCiudad") + ", " + g("fEstado") + ", C.P. " + g("fCP");
   let mensaje;
@@ -835,12 +861,13 @@ form.addEventListener("submit", e => {
       "🔢 *Cantidad:* " + cant + "\n" +
       "💲 *Precio unitario:* " + formato(productoActual.precio) + " (envío incluido)\n" +
       "💰 *TOTAL A PAGAR:* " + formato(total) + "\n" +
+      (metodoPago ? "💳 *MÉTODO DE PAGO:* " + (esCOD ? "CONTRA ENTREGA — paga al recibir" : "POR ADELANTADO — transferencia o depósito OXXO") + "\n" : "") +
       "━━━━━━━━━━━━━━━\n" +
       "👤 *Nombre:* " + g("fNombre") + "\n" +
       "📱 *Teléfono:* " + g("fTelefono") + "\n" +
       "🏠 *Dirección de entrega:*\n" + direccion + "\n" +
       "━━━━━━━━━━━━━━━\n" +
-      "📸 En este mismo chat te adjunto la captura de mi depósito para confirmar mi pedido. ¡Gracias!";
+      (esCOD ? "Quedo atento(a) a la confirmación de mi pedido contra entrega. ¡Gracias!" : "📸 En este mismo chat te adjunto la captura de mi depósito para confirmar mi pedido. ¡Gracias!");
   }
   document.getElementById("btnEnviarWA").href = "https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(mensaje);
   form.classList.add("paso-oculto");
@@ -881,12 +908,12 @@ function abrirDetalle(id){
   const st = document.getElementById("detalleStock");
   st.textContent = detalleActual.disp ? ("✅ " + detalleActual.disp) : "";
   st.style.display = detalleActual.disp ? "inline-block" : "none";
-  document.getElementById("detalleDesc").textContent = detalleActual.desc;
+  document.getElementById("detalleDesc").textContent = detalleActual.desc + (detalleActual.pagoDual ? " 💵 Disponible con pago contra entrega o pago por adelantado." : "");
   document.getElementById("detalleSpecs").innerHTML =
     (detalleActual.specs || []).map(s => '<li>' + s + '</li>').join("");
   cargarResenas(detalleActual.id);
   const msg = "Hola, me interesa este producto de AutoAccesorios MX: *" + detalleActual.nombre +
-    "* (" + formato(detalleActual.precio) + ", envío incluido). ¿Me das más información?";
+    "* (" + formato(detalleActual.precio) + ", envío incluido). ¿Me das más información?" + (detalleActual.pagoDual ? " Vi que tiene opción de pago contra entrega." : "");
   document.getElementById("btnWADetalle").href = "https://wa.me/" + NUM_WA + "?text=" + encodeURIComponent(msg);
   actualizarGaleria();
   detalleFondo.classList.add("abierto");
