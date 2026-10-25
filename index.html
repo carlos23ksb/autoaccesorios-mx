@@ -372,6 +372,11 @@ footer .marca{color:#fff;}
         <input type="text" id="fNombre" placeholder="Nombre y apellidos" required>
         <span class="error" id="eNombre">Escribe tu nombre completo.</span>
       </div>
+      <div class="campo" id="campoCorreo" style="display:none;">
+        <label for="fCorreo">Correo electrónico</label>
+        <input type="email" id="fCorreo" placeholder="Ej. cliente@correo.com">
+        <span class="error" id="eCorreo">Escribe un correo válido.</span>
+      </div>
       <div class="dos-col">
         <div class="campo">
           <label for="fCalle">Calle</label>
@@ -765,6 +770,7 @@ function abrirCheckout(id){
   document.getElementById("resumenNombre").textContent = productoActual.nombre;
   document.getElementById("resumenPrecio").textContent = formato(productoActual.precio);
   document.getElementById("campoPago").style.display = productoActual.pagoDual ? "block" : "none";
+  document.getElementById("campoCorreo").style.display = productoActual.pagoDual ? "block" : "none";
   form.classList.remove("paso-oculto");
   pasoPago.classList.add("paso-oculto");
   actualizarTotal();
@@ -783,6 +789,7 @@ function abrirCheckoutCarrito(){
     "<br><span style=\"color:#0d7a3c; font-weight:700;\">Precios con envío incluido</span>";
   document.getElementById("campoCantidad").style.display = "none";
   document.getElementById("campoPago").style.display = "none";
+  document.getElementById("campoCorreo").style.display = "none";
   form.classList.remove("paso-oculto");
   pasoPago.classList.add("paso-oculto");
   actualizarTotal();
@@ -820,6 +827,7 @@ form.addEventListener("submit", e => {
   ok = campoValido("fCiudad","eCiudad", v => v.length >= 3) && ok;
   ok = campoValido("fEstado","eEstado", v => v.length >= 2) && ok;
   ok = campoValido("fCP","eCP", v => /^\d{5}$/.test(v)) && ok;
+  if(!modoCarrito && productoActual.pagoDual){ ok = campoValido("fCorreo","eCorreo", v => /^\S+@\S+\.\S+$/.test(v)) && ok; }
   if(!ok) return;
 
   const {cant, total} = actualizarTotal();
@@ -866,6 +874,7 @@ form.addEventListener("submit", e => {
       "━━━━━━━━━━━━━━━\n" +
       "👤 *Nombre:* " + g("fNombre") + "\n" +
       "📱 *Teléfono:* " + g("fTelefono") + "\n" +
+      (productoActual.pagoDual ? "📧 *Correo:* " + g("fCorreo") + "\n" : "") +
       "🏠 *Dirección de entrega:*\n" + direccion + "\n" +
       "━━━━━━━━━━━━━━━\n" +
       (esCOD ? "Quedo atento(a) a la confirmación de mi pedido contra entrega. ¡Gracias!" : "📸 En este mismo chat te adjunto la captura de mi depósito para confirmar mi pedido. ¡Gracias!");
